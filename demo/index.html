@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>sdl-srch-grid demo</title>
+<!--     <script type="module" src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script> -->
+    <script type="module" src="../src/components/sdl-srch-grid.js"></script>
+    <script type="module">
+      import '@polymer/iron-demo-helpers/demo-pages-shared-styles.js';
+      import '@polymer/iron-demo-helpers/demo-snippet.js';
+      import '@polymer/paper-input/paper-input.js';
+      import '@polymer/iron-icons/iron-icons.js';
+      import '@polymer/iron-icon/iron-icon.js';
+      import '@polymer/iron-form/iron-form.js';
+    </script>
+
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h1>Basic sdl-srch-grid demo -- with 'ajaxUrl' specified</h1>
+      <p><b><u>Note:</u></b>  </p>
+      <demo-snippet>
+        <template>         
+
+<!-- If using as a stand-alone-component:  use sdl-srch-grid-loader.js
+<script src="./node_modules/@sdl-web/sdl-srch-grid/build-component/sdl-srch-grid-loader.js"></script> -->
+
+<!-- If using in an existing polymer project:  use sdl-srch-grid.js directly-->
+<!-- <script type="import" src="@sdl-web/sdl-srch-grid/src/components/sdl-srch-grid.js"></script>  -->
+
+<!-- Now add sdl-srch-grid to html section -->
+<sdl-srch-grid id='srch-grid' ajaxUrl='./data/srch-data.txt'>  
+
+    <!-- Put whatever input fields (and styling) you want into this slot -->
+      <form>
+        <paper-input name="input1" label="Filter Search">
+          <iron-icon icon="search" id="srch-icon" slot="prefix"></iron-icon>
+        </paper-input>
+      </form>
+  
+</sdl-srch-grid>
+
+        </template>
+      </demo-snippet>
+    </div>
+
+    <script>
+    addEventListener('DOMContentLoaded', function(){ 
+
+      console.log("Srch Grid Loaded...");
+
+      }, false);
+
+    </script>
+  </body>
+</html>

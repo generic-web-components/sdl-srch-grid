@@ -1,0 +1,20 @@
+{
+  "name": "@sdl-web/sdl-srch-grid",
+  "version": "1.0.0",
+  "description": "Advanced Search Grid",
+  "main": "index.js",
+  "repository": "git+https://github.com/generic-web-components/sdl-srch-grid.git",
+  "author": "Marty Israelsen",
+  "license": "MIT",
+  "dependencies": {
+    "@sdl-web/sdl-srch-bar": "^1.0.8"
+  },
+  "resolutions": {},
+  "devDependencies": {
+    "@polymer/iron-demo-helpers": "^3.0.0-pre.21",
+    "@polymer/iron-icon": "^3.0.0-pre.21",
+    "@polymer/iron-icons": "^3.0.0-pre.21",
+    "@polymer/paper-input": "^3.0.0-pre.21",
+    "@webcomponents/webcomponentsjs": "^2.0.2"
+  }
+}

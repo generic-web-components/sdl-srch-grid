@@ -1,0 +1,16 @@
+{
+    "success": true,
+    "payload": [{
+    "_id": "1",
+    "age": "33",
+    "eyeColor": "green",
+    "name": "Boy Blue",
+    "gender": "male"
+  },{
+    "_id": "2",
+    "age": "44",
+    "eyeColor": "blue",
+    "name": "Jack Spratt",
+    "gender": "male"
+  }]
+}

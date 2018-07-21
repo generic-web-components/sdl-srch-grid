@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>sdl-srch-bar demo</title>
+    <script type="module" src="../../sdl-srch-grid-loader.js"></script>
+
+  </head>
+  <body>
+          <sdl-srch-grid id='srch-grid' ajaxUrl='data/srch-data.txt'>  
+
+            <form>
+              <input name="input1" label="Filter Search">
+            </form>
+            
+          </sdl-srch-grid>
+    <br><br><br>
+
+    <script>
+    addEventListener('DOMContentLoaded', function(){ 
+
+
+      }, false);
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "entrypoint": "./src/components/sdl-srch-grid.js",
+  "shell": "./src/components/sdl-srch-grid.js",
+  "sources": [
+   "./demo/data/*",
+   "./demo/index.html.build-component",
+   "./tools/*",
+   "./node_modules/@webcomponents/*"
+  ],
+  "extraDependencies": [
+    "./node_modules/@webcomponents/**/*",
+    "./node_modules/@polymer/iron-demo-helpers/**/*"
+  ],
+  "builds": [
+    { "preset": "es6-bundled" }
+  ],
+  "moduleResolution": "node",
+  "npm": true
+}

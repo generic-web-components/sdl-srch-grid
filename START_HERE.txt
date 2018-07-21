@@ -1,0 +1,18 @@
+Starting a Polymer 3.0 project with yarn example:
+-------------------------------------------------
+> mkdir sdl-srch-bar
+> yarn init
+# Answer the prompts to set up your project (in most cases accept the defaults)
+
+# Note:  Leave "flat": true     out of the package.json file and add --flat flag when adding front-end components.   Example below:
+
+> yarn add --flat @polymer/polymer@next
+
+# For an existing project with a package.json file, this approach is probably less disruptive.
+
+# This has the advantage of keeping all dependencies in a single node_modules folder, but means that you need to remember the --flat flag every time you add a component.
+
+## See the following link for more details: 
+# https://www.polymer-project.org/blog/2017-08-23-hands-on-30-preview  
+
+# Visit README.md file for more information and next steps
