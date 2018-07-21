@@ -7,7 +7,8 @@
   "author": "Marty Israelsen",
   "license": "MIT",
   "dependencies": {
-    "@sdl-web/sdl-srch-bar": "^1.0.8"
+    "@sdl-web/sdl-srch-bar": "^1.0.8",
+    "@vaadin/vaadin-grid": "^5.1.0-alpha3"
   },
   "resolutions": {},
   "devDependencies": {

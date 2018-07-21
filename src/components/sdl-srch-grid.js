@@ -1,6 +1,7 @@
 import {LitElement, html} from '@polymer/lit-element';
 import '@polymer/iron-form/iron-form.js';
 import '@sdl-web/sdl-srch-bar/src/components/sdl-srch-bar.js';
+import '@vaadin/vaadin-grid/vaadin-grid.js';
 
 /**
  * `sdl-srch-grid`
@@ -54,6 +55,43 @@ class SdlSrchGrid extends LitElement {
       <sdl-srch-bar id="srch-bar2">
         <slot></slot>
       </sdl-srch-bar>
+
+    <vaadin-grid aria-label="Basic Binding Example" items='[{
+    "_id": "1",
+    "age": "33",
+    "eyeColor": "green",
+    "name": "Boy Blue",
+    "gender": "male"
+  },{
+    "_id": "2",
+    "age": "44",
+    "eyeColor": "blue",
+    "name": "Jack Spratt",
+    "gender": "male"
+  }]'>
+      <vaadin-grid-column width="60px" flex-grow="0">
+        <template class="header">#</template>
+        <template></template>
+      </vaadin-grid-column>
+
+      <vaadin-grid-column>
+        <template class="header">Name</template>
+        <template>[[item.name]]</template>
+      </vaadin-grid-column>
+
+      <vaadin-grid-column width="8em">
+        <template class="header">Gender</template>
+        <template>
+          <div style="white-space: normal">[[item.gender]]</div>
+        </template>
+      </vaadin-grid-column>
+
+      <vaadin-grid-column>
+        <template class="header">Eye Color</template>
+        <template>[[item.eyeColor]]</template>
+      </vaadin-grid-column>
+
+    </vaadin-grid>
     `;
   }
 
