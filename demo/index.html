@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
     <title>sdl-srch-grid demo</title>
-<!--     <script type="module" src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script> -->
+    <script type="module" src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
     <script type="module" src="../src/components/sdl-srch-grid.js"></script>
     <script type="module">
       import '@polymer/iron-demo-helpers/demo-pages-shared-styles.js';
@@ -24,8 +24,9 @@
   </head>
   <body>
     <div class="vertical-section-container centered">
-      <h1>Basic sdl-srch-grid demo -- with 'ajaxUrl' specified</h1>
-      <p><b><u>Note:</u></b>  </p>
+      <h1>Basic sdl-srch-grid demo</h1>
+      <p><b><u>Note: Type in search field to generate ajax call to server.</u></b>  </p>
+      <p><b>(8,000 records)</b>  </p>
       <demo-snippet>
         <template>         
 
@@ -36,20 +37,88 @@
 <!-- <script type="import" src="@sdl-web/sdl-srch-grid/src/components/sdl-srch-grid.js"></script>  -->
 
 <!-- Now add sdl-srch-grid to html section -->
-<sdl-srch-grid id='srch-grid' ajaxUrl='./data/srch-data.txt'>  
+<sdl-srch-grid id='srch-grid' url='./data/srch-data-8000.txt'>  
 
-    <!-- Put whatever input fields (and styling) you want into this slot -->
-      <form>
-        <paper-input name="input1" label="Filter Search">
-          <iron-icon icon="search" id="srch-icon" slot="prefix"></iron-icon>
-        </paper-input>
-      </form>
-  
+  <!-- Put whatever input fields (and styling) you want into 'search-slot' -->
+  <form slot="search-slot">
+    <paper-input name="input1" label="Filter Search">
+      <iron-icon icon="search" id="srch-icon" slot="prefix"></iron-icon>
+    </paper-input>
+  </form>
+
+  <!-- Add your columns using vaadin-grid-column into the 'column-slot' -->
+  <vaadin-grid-column slot="column-slot">
+    <template class="header">Name</template>
+        <template>
+          <vaadin-grid-tree-toggle leaf="[[!item.hasChildren]]" expanded="{{expanded}}" level="[[level]]">
+            [[item.name]]
+          </vaadin-grid-tree-toggle>
+        </template>
+  </vaadin-grid-column>
+  <vaadin-grid-column slot="column-slot">
+    <template class="header"><vaadin-grid-sorter path="gender">Gender</vaadin-grid-sorter></template>
+    <template>[[item.gender]]</template>
+  </vaadin-grid-column>
+  <vaadin-grid-column slot="column-slot">
+    <template class="header">Eye Color</template>
+    <template>[[item.eyeColor]]</template>
+  </vaadin-grid-column>     
+
 </sdl-srch-grid>
 
         </template>
       </demo-snippet>
     </div>
+
+
+    <div class="vertical-section-container centered">
+      <h1>Basic sdl-srch-grid demo</h1>
+      <p><b><u>Note: Type in search field to generate ajax call to server.</u></b>  </p>
+      <p><b>Check out the smooth scrooling with (70,000 records)!</b>  </p>
+      <demo-snippet>
+        <template>         
+
+<!-- Now add sdl-srch-grid to html section -->
+<sdl-srch-grid id='srch-grid' url='./data/srch-data-70000.txt'>  
+
+  <!-- Put whatever input fields (and styling) you want into 'search-slot' -->
+  <form slot="search-slot">
+    <paper-input name="input1" label="Filter Search">
+      <iron-icon icon="search" id="srch-icon" slot="prefix"></iron-icon>
+    </paper-input>
+  </form>
+
+  <!-- Add your columns using vaadin-grid-column into the 'column-slot' -->
+  <vaadin-grid-column slot="column-slot">
+    <template class="header">Id</template>
+    <template>[[item._id]]</template>
+  </vaadin-grid-column>
+  <vaadin-grid-column slot="column-slot">
+    <template class="header">Name</template>
+    <template>
+      <vaadin-grid-tree-toggle leaf="[[!item.hasChildren]]" expanded="{{expanded}}" level="[[level]]">
+        [[item.name]]
+      </vaadin-grid-tree-toggle>
+    </template>
+  </vaadin-grid-column>
+  <vaadin-grid-column slot="column-slot">
+    <template class="header"><vaadin-grid-sorter path="gender">Gender</vaadin-grid-sorter></template>
+    <template>[[item.gender]]</template>
+  </vaadin-grid-column>
+  <vaadin-grid-column slot="column-slot">
+    <template class="header">Eye Color</template>
+    <template>[[item.eyeColor]]</template>
+  </vaadin-grid-column>     
+
+</sdl-srch-grid>
+
+        </template>
+      </demo-snippet>
+    </div>
+
+
+ 
+
 
     <script>
     addEventListener('DOMContentLoaded', function(){ 
@@ -57,7 +126,6 @@
       console.log("Srch Grid Loaded...");
 
       }, false);
-
     </script>
   </body>
 </html>
