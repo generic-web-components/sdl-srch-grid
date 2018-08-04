@@ -49,11 +49,7 @@
   <!-- Add your columns using vaadin-grid-column into the 'column-slot' -->
   <vaadin-grid-column slot="column-slot">
     <template class="header">Name</template>
-        <template>
-          <vaadin-grid-tree-toggle leaf="[[!item.hasChildren]]" expanded="{{expanded}}" level="[[level]]">
-            [[item.name]]
-          </vaadin-grid-tree-toggle>
-        </template>
+    <template>[[item.name]]</template>
   </vaadin-grid-column>
   <vaadin-grid-column slot="column-slot">
     <template class="header"><vaadin-grid-sorter path="gender">Gender</vaadin-grid-sorter></template>
@@ -72,7 +68,6 @@
 
 
     <div class="vertical-section-container centered">
-      <h1>Basic sdl-srch-grid demo</h1>
       <p><b><u>Note: Type in search field to generate ajax call to server.</u></b>  </p>
       <p><b>Check out the smooth scrooling with (70,000 records)!</b>  </p>
       <demo-snippet>
@@ -95,11 +90,7 @@
   </vaadin-grid-column>
   <vaadin-grid-column slot="column-slot">
     <template class="header">Name</template>
-    <template>
-      <vaadin-grid-tree-toggle leaf="[[!item.hasChildren]]" expanded="{{expanded}}" level="[[level]]">
-        [[item.name]]
-      </vaadin-grid-tree-toggle>
-    </template>
+    <template>[[item.name]]</template>
   </vaadin-grid-column>
   <vaadin-grid-column slot="column-slot">
     <template class="header"><vaadin-grid-sorter path="gender">Gender</vaadin-grid-sorter></template>
@@ -117,6 +108,44 @@
     </div>
 
 
+    <div class="vertical-section-container centered">
+      <p><b>Example of showing Tree View using 'expandAll' flag</b>  </p>
+      <demo-snippet>
+        <template>         
+
+<!-- Now add sdl-srch-grid to html section -->
+<sdl-srch-grid id='srch-grid'  url='./data/srch-data-tree.txt' expandall>  
+
+  <!-- Put whatever input fields (and styling) you want into 'search-slot' -->
+  <form slot="search-slot">
+    <paper-input name="input1" label="Filter Search">
+      <iron-icon icon="search" id="srch-icon" slot="prefix"></iron-icon>
+    </paper-input>
+  </form>
+
+  <!-- Add your columns using vaadin-grid-column into the 'column-slot' -->
+  <vaadin-grid-column slot="column-slot">
+    <template class="header">Name</template>
+        <template>
+          <vaadin-grid-tree-toggle leaf="[[!item.hasChildren]]" expanded="{{expanded}}" level="[[level]]">
+            [[item.name]]
+          </vaadin-grid-tree-toggle>
+        </template>
+  </vaadin-grid-column>
+  <vaadin-grid-column slot="column-slot">
+    <template class="header"><vaadin-grid-sorter path="gender">Gender</vaadin-grid-sorter></template>
+    <template>[[item.gender]]</template>
+  </vaadin-grid-column>
+  <vaadin-grid-column slot="column-slot">
+    <template class="header">Eye Color</template>
+    <template>[[item.eyeColor]]</template>
+  </vaadin-grid-column>     
+
+</sdl-srch-grid>
+
+        </template>
+      </demo-snippet>
+    </div>
  
 
 
@@ -125,7 +154,7 @@
 
       console.log("Srch Grid Loaded...");
 
-      }, false);
+    });
     </script>
   </body>
 </html>

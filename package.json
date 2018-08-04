@@ -8,7 +8,8 @@
   "license": "MIT",
   "dependencies": {
     "@sdl-web/sdl-srch-bar": "^1.0.8",
-    "@vaadin/vaadin-grid": "^5.1.0-alpha3"
+    "@vaadin/vaadin-grid": "^5.1.0-alpha3",
+    "jquery": "^3.3.1"
   },
   "resolutions": {},
   "devDependencies": {
