@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
     <title>sdl-srch-bar demo</title>
-    <script type="module" src="../../sdl-srch-grid-loader.js"></script>
+    <script src="../../sdl-srch-grid-loader.js"></script>
 
   </head>
   <body>
