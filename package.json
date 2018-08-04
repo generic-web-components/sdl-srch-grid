@@ -7,8 +7,10 @@
   "author": "Marty Israelsen",
   "license": "MIT",
   "dependencies": {
+    "@polymer/iron-pages": "^3.0.0-pre.21",
     "@sdl-web/sdl-srch-bar": "^1.0.11",
-    "@vaadin/vaadin-grid": "^5.1.0-beta2"
+    "@vaadin/vaadin-grid": "^5.1.0-beta2",
+    "@vaadin/vaadin-tabs": "^2.1.0-beta2"
   },
   "resolutions": {},
   "devDependencies": {

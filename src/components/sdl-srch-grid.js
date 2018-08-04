@@ -5,6 +5,7 @@ import '@sdl-web/sdl-srch-bar/src/components/sdl-srch-bar.js';
 import '@vaadin/vaadin-grid/vaadin-grid.js';
 import '@vaadin/vaadin-grid/vaadin-grid-tree-toggle.js';
 import '@vaadin/vaadin-grid/vaadin-grid-sorter.js';
+import '@vaadin/vaadin-grid/vaadin-grid-selection-column.js';
 
 /**
  * `sdl-srch-grid`

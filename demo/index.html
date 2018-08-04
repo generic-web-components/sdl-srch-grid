@@ -14,8 +14,9 @@
       import '@polymer/iron-icons/iron-icons.js';
       import '@polymer/iron-icon/iron-icon.js';
       import '@polymer/iron-form/iron-form.js';
+      import '@polymer/iron-pages/iron-pages.js';
+      import '@vaadin/vaadin-tabs/vaadin-tabs.js';
     </script>
-
 
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
@@ -23,6 +24,16 @@
     </custom-style>
   </head>
   <body>
+
+    <vaadin-tabs id="tabs" selected="0">
+    <vaadin-tab>Basic Usage</vaadin-tab>
+    <vaadin-tab>Select Column</vaadin-tab>
+    <vaadin-tab>70,000 Records!</vaadin-tab>
+    <vaadin-tab>Tree View</vaadin-tab>
+  </vaadin-tabs>
+
+  <iron-pages id="pages">
+
     <div class="vertical-section-container centered">
       <h1>Basic sdl-srch-grid demo</h1>
       <p><b><u>Note: Type in search field to generate ajax call to server.</u></b>  </p>
@@ -66,6 +77,47 @@
       </demo-snippet>
     </div>
 
+    <div class="vertical-section-container centered">
+        <h1>Adding in a Selection Column</h1>
+        <demo-snippet>
+          <template>         
+  
+  <!-- If using as a stand-alone-component:  use sdl-srch-grid-loader.js
+  <script src="./node_modules/@sdl-web/sdl-srch-grid/build-component/sdl-srch-grid-loader.js"></script> -->
+  
+  <!-- If using in an existing polymer project:  use sdl-srch-grid.js directly-->
+  <!-- <script type="import" src="@sdl-web/sdl-srch-grid/src/components/sdl-srch-grid.js"></script>  -->
+  
+  <!-- Now add sdl-srch-grid to html section -->
+  <sdl-srch-grid id='srch-grid' url='./data/srch-data-8000.txt'>  
+  
+    <!-- Put whatever input fields (and styling) you want into 'search-slot' -->
+    <form slot="search-slot">
+      <paper-input name="input1" label="Filter Search">
+        <iron-icon icon="search" id="srch-icon" slot="prefix"></iron-icon>
+      </paper-input>
+    </form>
+  
+    <!-- Add your columns using vaadin-grid-column into the 'column-slot' -->
+    <vaadin-grid-selection-column auto-select slot="column-slot"> </vaadin-grid-selection-column>
+    <vaadin-grid-column slot="column-slot">
+      <template class="header">Name</template>
+      <template>[[item.name]]</template>
+    </vaadin-grid-column>
+    <vaadin-grid-column slot="column-slot">
+      <template class="header"><vaadin-grid-sorter path="gender">Gender</vaadin-grid-sorter></template>
+      <template>[[item.gender]]</template>
+    </vaadin-grid-column>
+    <vaadin-grid-column slot="column-slot">
+      <template class="header">Eye Color</template>
+      <template>[[item.eyeColor]]</template>
+    </vaadin-grid-column>     
+  
+  </sdl-srch-grid>
+  
+          </template>
+        </demo-snippet>
+      </div>
 
     <div class="vertical-section-container centered">
       <p><b><u>Note: Type in search field to generate ajax call to server.</u></b>  </p>
@@ -146,13 +198,21 @@
         </template>
       </demo-snippet>
     </div>
- 
+</iron-pages> 
 
 
     <script>
-    addEventListener('DOMContentLoaded', function(){ 
 
+    addEventListener('DOMContentLoaded', function(){ 
       console.log("Srch Grid Loaded...");
+      var tabs = document.getElementById('tabs');
+      var pages = document.getElementById('pages');
+      tabs.addEventListener('click', function(e,b,c) {
+        setTimeout(function(){ 
+          pages.selected = tabs.selected;
+        }, 100);
+      });
+      pages.selected = 0;
 
     });
     </script>
