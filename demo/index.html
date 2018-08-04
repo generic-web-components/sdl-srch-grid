@@ -20,13 +20,25 @@
 
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
+        fieldset { 
+    display: block;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-top: 0.35em;
+    padding-bottom: 0.625em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    border-radius: 5px;
+    border: 2px groove (internal value);
+}
       </style>
+      
     </custom-style>
   </head>
   <body>
 
     <vaadin-tabs id="tabs" selected="0">
-    <vaadin-tab>Basic Usage</vaadin-tab>
+    <vaadin-tab>Basic Usage w slots</vaadin-tab>
     <vaadin-tab>Select Column</vaadin-tab>
     <vaadin-tab>70,000 Records!</vaadin-tab>
     <vaadin-tab>Tree View</vaadin-tab>
@@ -35,9 +47,9 @@
   <iron-pages id="pages">
 
     <div class="vertical-section-container centered">
-      <h1>Basic sdl-srch-grid demo</h1>
-      <p><b><u>Note: Type in search field to generate ajax call to server.</u></b>  </p>
-      <p><b>(8,000 records)</b>  </p>
+      <h1>Basic sdl-srch-grid demo (using slots)</h1>
+      <p><u>Note: Type in search field to generate ajax call(s) to server.</u>  
+        Notice you can use any input type fields in the slot as well as any formatting you wish.  We are using txt files for the ajax so don't be worried about the filtering not working;)</p>
       <demo-snippet>
         <template>         
 
@@ -55,6 +67,7 @@
     <paper-input name="input1" label="Filter Search">
       <iron-icon icon="search" id="srch-icon" slot="prefix"></iron-icon>
     </paper-input>
+    Show Active <input type="checkbox" name="active"></input>
   </form>
 
   <!-- Add your columns using vaadin-grid-column into the 'column-slot' -->
