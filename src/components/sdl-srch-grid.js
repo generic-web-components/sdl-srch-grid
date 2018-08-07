@@ -27,6 +27,7 @@ class SdlSrchGrid extends LitElement {
         let grid = this._root.querySelector('#vgrid');
 
           grid.allData = e.detail.payload;
+          //grid.items = e.detail.payload;
           grid.url = me.url;
           grid.formData = e.detail.formData;
           grid.expandAll = me.expandAll;
@@ -87,6 +88,9 @@ class SdlSrchGrid extends LitElement {
 
   static get properties() { 
     return { 
+      theme: {
+        type: String
+      },
       url: {
         type: String
       }, 
@@ -98,20 +102,25 @@ class SdlSrchGrid extends LitElement {
 
   _render(props) {
     var me = this;
+    console.log(props,props.theme);
 
-      return html`
+    if (typeof props.theme == 'undefined') {
+      props.theme = "row-stripes";
+    }
+
+    return html`
       <style>
         :host {
           display: block;
         }
       </style>
 
-      <sdl-srch-bar id="srch-bar" ajaxUrl=${this.url} theme="row-stripes">
+      <sdl-srch-bar id="srch-bar" ajaxUrl=${props.url}>
         <slot name="search-slot"></slot>
       </sdl-srch-bar>
-
-      <vaadin-grid id="vgrid"">
-        <slot name="column-slot"></slot>
+      
+      <vaadin-grid id='vgrid' theme='${props.theme}'>
+        <slot name='column-slot'></slot>
       </vaadin-grid>
 
     `;

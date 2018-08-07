@@ -345,6 +345,12 @@ jquery@^3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
+lit-element@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/lit-element/-/lit-element-0.5.0.tgz#88d42fba7bd8fab454f5bf2057973a5edee27010"
+  dependencies:
+    lit-html "^0.10.0"
+
 lit-html@^0.10.0:
   version "0.10.2"
   resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-0.10.2.tgz#53c846afcf91bb1e6623179ef22e327ab8ac0e0e"

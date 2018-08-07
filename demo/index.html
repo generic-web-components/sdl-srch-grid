@@ -20,17 +20,16 @@
 
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
-        fieldset { 
-    display: block;
-    margin-left: 2px;
-    margin-right: 2px;
-    padding-top: 0.35em;
-    padding-bottom: 0.625em;
-    padding-left: 0.75em;
-    padding-right: 0.75em;
-    border-radius: 5px;
-    border: 2px groove (internal value);
-}
+        .details {
+          display: flex;
+          font-size: 20px;
+        }
+
+        img {
+          width: 80px;
+          height: 80px;
+          margin: 20px;
+        }
       </style>
       
     </custom-style>
@@ -42,6 +41,7 @@
     <vaadin-tab>Select Column</vaadin-tab>
     <vaadin-tab>70,000 Records!</vaadin-tab>
     <vaadin-tab>Tree View</vaadin-tab>
+    <!-- <vaadin-tab>Google like</vaadin-tab> -->
   </vaadin-tabs>
 
   <iron-pages id="pages">
@@ -210,6 +210,50 @@
         </template>
       </demo-snippet>
     </div>
+    <div class="vertical-section-container centered">
+      <h1>Google like searching</h1>
+    <demo-snippet>
+      <template>         
+
+<!-- Now add sdl-srch-grid to html section -->
+<sdl-srch-grid id='srch-grid' url='./data/srch-data-8000.txt' theme="row-stripes">  
+
+<!-- Put whatever input fields (and styling) you want into 'search-slot' -->
+<form slot="search-slot">
+  <paper-input name="input1" label="Filter Search">
+    <iron-icon icon="search" id="srch-icon" slot="prefix"></iron-icon>
+  </paper-input>
+</form>
+
+  <template class="row-details" slot="column-slot">
+    <div class="details">
+      <p>Hi! My name is [[item.name.first]]!<br><small>[[item.email]]</small></p>
+    </div>
+  </template>
+
+<!-- Add your columns using vaadin-grid-column into the 'column-slot' -->
+<vaadin-grid-column slot="column-slot">
+  <template class="header">Id</template>
+  <template>[[item._id]]</template>
+</vaadin-grid-column>
+<vaadin-grid-column slot="column-slot">
+  <template class="header">Name</template>
+  <template>[[item.name]]</template>
+</vaadin-grid-column>
+<vaadin-grid-column slot="column-slot">
+  <template class="header"><vaadin-grid-sorter path="gender">Gender</vaadin-grid-sorter></template>
+  <template>[[item.gender]]</template>
+</vaadin-grid-column>
+<vaadin-grid-column slot="column-slot">
+  <template class="header">Eye Color</template>
+  <template>[[item.eyeColor]]</template>
+</vaadin-grid-column>     
+
+</sdl-srch-grid>
+
+      </template>
+    </demo-snippet>
+  </div>
 </iron-pages> 
 
 
