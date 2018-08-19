@@ -70,19 +70,21 @@
     Show Active <input type="checkbox" name="active"></input>
   </form>
 
-  <!-- Add your columns using vaadin-grid-column into the 'column-slot' -->
-  <vaadin-grid-column slot="column-slot">
-    <template class="header">Name</template>
-    <template>[[item.name]]</template>
-  </vaadin-grid-column>
-  <vaadin-grid-column slot="column-slot">
-    <template class="header"><vaadin-grid-sorter path="gender">Gender</vaadin-grid-sorter></template>
-    <template>[[item.gender]]</template>
-  </vaadin-grid-column>
-  <vaadin-grid-column slot="column-slot">
-    <template class="header">Eye Color</template>
-    <template>[[item.eyeColor]]</template>
-  </vaadin-grid-column>     
+  <!-- Add the vaadin-grid into the 'grid-slot' -->
+  <vaadin-grid slot="grid-slot">
+    <vaadin-grid-column>
+      <template class="header">Name</template>
+      <template>[[item.name]]</template>
+    </vaadin-grid-column>
+    <vaadin-grid-column>
+      <template class="header"><vaadin-grid-sorter path="gender">Gender</vaadin-grid-sorter></template>
+      <template>[[item.gender]]</template>
+    </vaadin-grid-column>
+    <vaadin-grid-column>
+      <template class="header">Eye Color</template>
+      <template>[[item.eyeColor]]</template>
+    </vaadin-grid-column>   
+  </vaadin-grid>  
 
 </sdl-srch-grid>
 
@@ -91,7 +93,7 @@
     </div>
 
     <div class="vertical-section-container centered">
-        <h1>Adding in a Selection Column</h1>
+        <h1>Adding in a Selection Column with row-stripes</h1>
         <demo-snippet>
           <template>         
   
@@ -111,21 +113,22 @@
       </paper-input>
     </form>
   
-    <!-- Add your columns using vaadin-grid-column into the 'column-slot' -->
-    <vaadin-grid-selection-column auto-select slot="column-slot"> </vaadin-grid-selection-column>
-    <vaadin-grid-column slot="column-slot">
-      <template class="header">Name</template>
-      <template>[[item.name]]</template>
-    </vaadin-grid-column>
-    <vaadin-grid-column slot="column-slot">
-      <template class="header"><vaadin-grid-sorter path="gender">Gender</vaadin-grid-sorter></template>
-      <template>[[item.gender]]</template>
-    </vaadin-grid-column>
-    <vaadin-grid-column slot="column-slot">
-      <template class="header">Eye Color</template>
-      <template>[[item.eyeColor]]</template>
-    </vaadin-grid-column>     
-  
+    <!-- Add the vaadin-grid into the 'grid-slot' -->
+    <vaadin-grid theme='row-stripes' slot="grid-slot">
+      <vaadin-grid-selection-column auto-select> </vaadin-grid-selection-column>
+      <vaadin-grid-column>
+        <template class="header">Name</template>
+        <template>[[item.name]]</template>
+      </vaadin-grid-column>
+      <vaadin-grid-column>
+        <template class="header"><vaadin-grid-sorter path="gender">Gender</vaadin-grid-sorter></template>
+        <template>[[item.gender]]</template>
+      </vaadin-grid-column>
+      <vaadin-grid-column>
+        <template class="header">Eye Color</template>
+        <template>[[item.eyeColor]]</template>
+      </vaadin-grid-column>     
+    </vaadin-grid>
   </sdl-srch-grid>
   
           </template>
@@ -147,23 +150,25 @@
     </paper-input>
   </form>
 
-  <!-- Add your columns using vaadin-grid-column into the 'column-slot' -->
-  <vaadin-grid-column slot="column-slot">
-    <template class="header">Id</template>
-    <template>[[item._id]]</template>
-  </vaadin-grid-column>
-  <vaadin-grid-column slot="column-slot">
-    <template class="header">Name</template>
-    <template>[[item.name]]</template>
-  </vaadin-grid-column>
-  <vaadin-grid-column slot="column-slot">
-    <template class="header"><vaadin-grid-sorter path="gender">Gender</vaadin-grid-sorter></template>
-    <template>[[item.gender]]</template>
-  </vaadin-grid-column>
-  <vaadin-grid-column slot="column-slot">
-    <template class="header">Eye Color</template>
-    <template>[[item.eyeColor]]</template>
-  </vaadin-grid-column>     
+  <!-- Add the vaadin-grid into the 'grid-slot' -->
+  <vaadin-grid slot="grid-slot">
+    <vaadin-grid-column  >
+      <template class="header">Id</template>
+      <template>[[item._id]]</template>
+    </vaadin-grid-column>
+    <vaadin-grid-column  >
+      <template class="header">Name</template>
+      <template>[[item.name]]</template>
+    </vaadin-grid-column>
+    <vaadin-grid-column  >
+      <template class="header"><vaadin-grid-sorter path="gender">Gender</vaadin-grid-sorter></template>
+      <template>[[item.gender]]</template>
+    </vaadin-grid-column>
+    <vaadin-grid-column  >
+      <template class="header">Eye Color</template>
+      <template>[[item.eyeColor]]</template>
+    </vaadin-grid-column>   
+  </vaadin-grid>  
 
 </sdl-srch-grid>
 
@@ -173,7 +178,7 @@
 
 
     <div class="vertical-section-container centered">
-        <h1>Tree View using 'expandAll' flag</h1>
+        <h1>Tree View using 'expandall' flag</h1>
       <demo-snippet>
         <template>         
 
@@ -187,23 +192,25 @@
     </paper-input>
   </form>
 
-  <!-- Add your columns using vaadin-grid-column into the 'column-slot' -->
-  <vaadin-grid-column slot="column-slot">
-    <template class="header">Name</template>
-        <template>
-          <vaadin-grid-tree-toggle leaf="[[!item.hasChildren]]" expanded="{{expanded}}" level="[[level]]">
-            [[item.name]]
-          </vaadin-grid-tree-toggle>
-        </template>
-  </vaadin-grid-column>
-  <vaadin-grid-column slot="column-slot">
-    <template class="header"><vaadin-grid-sorter path="gender">Gender</vaadin-grid-sorter></template>
-    <template>[[item.gender]]</template>
-  </vaadin-grid-column>
-  <vaadin-grid-column slot="column-slot">
-    <template class="header">Eye Color</template>
-    <template>[[item.eyeColor]]</template>
-  </vaadin-grid-column>     
+  <!-- Add the vaadin-grid into the 'grid-slot' -->
+  <vaadin-grid slot="grid-slot">
+    <vaadin-grid-column  >
+      <template class="header">Name</template>
+          <template>
+            <vaadin-grid-tree-toggle leaf="[[!item.hasChildren]]" expanded="{{expanded}}" level="[[level]]">
+              [[item.name]]
+            </vaadin-grid-tree-toggle>
+          </template>
+    </vaadin-grid-column>
+    <vaadin-grid-column  >
+      <template class="header">Gender</template>
+      <template>[[item.gender]]</template>
+    </vaadin-grid-column>
+    <vaadin-grid-column  >
+      <template class="header">Eye Color</template>
+      <template>[[item.eyeColor]]</template>
+    </vaadin-grid-column>     
+  </vaadin-grid>
 
 </sdl-srch-grid>
 
@@ -225,29 +232,31 @@
   </paper-input>
 </form>
 
-  <template class="row-details" slot="column-slot">
+  <template class="row-details"  >
     <div class="details">
       <p>Hi! My name is [[item.name.first]]!<br><small>[[item.email]]</small></p>
     </div>
   </template>
 
-<!-- Add your columns using vaadin-grid-column into the 'column-slot' -->
-<vaadin-grid-column slot="column-slot">
-  <template class="header">Id</template>
-  <template>[[item._id]]</template>
-</vaadin-grid-column>
-<vaadin-grid-column slot="column-slot">
-  <template class="header">Name</template>
-  <template>[[item.name]]</template>
-</vaadin-grid-column>
-<vaadin-grid-column slot="column-slot">
-  <template class="header"><vaadin-grid-sorter path="gender">Gender</vaadin-grid-sorter></template>
-  <template>[[item.gender]]</template>
-</vaadin-grid-column>
-<vaadin-grid-column slot="column-slot">
-  <template class="header">Eye Color</template>
-  <template>[[item.eyeColor]]</template>
-</vaadin-grid-column>     
+  <!-- Add the vaadin-grid into the 'grid-slot' -->
+<vaadin-grid theme='row-stripes' slot="grid-slot">
+  <vaadin-grid-column>
+    <template class="header">Id</template>
+    <template>[[item._id]]</template>
+  </vaadin-grid-column>
+  <vaadin-grid-column  >
+    <template class="header">Name</template>
+    <template>[[item.name]]</template>
+  </vaadin-grid-column>
+  <vaadin-grid-column  >
+    <template class="header"><vaadin-grid-sorter path="gender">Gender</vaadin-grid-sorter></template>
+    <template>[[item.gender]]</template>
+  </vaadin-grid-column>
+  <vaadin-grid-column  >
+    <template class="header">Eye Color</template>
+    <template>[[item.eyeColor]]</template>
+  </vaadin-grid-column>     
+</vaadin-grid>
 
 </sdl-srch-grid>
 

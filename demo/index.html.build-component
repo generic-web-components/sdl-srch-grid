@@ -16,23 +16,21 @@
     <input name="input1" label="Filter Search"></input>
   </form>
 
-  <!-- Add your columns using vaadin-grid-column into the 'column-slot' -->
-  <vaadin-grid-column slot="column-slot">
-    <template class="header">Id</template>
-    <template>[[item._id]]</template>
-  </vaadin-grid-column>
-  <vaadin-grid-column slot="column-slot">
-    <template class="header">Name</template>
-    <template>[[item.name]]</template>
-  </vaadin-grid-column>
-  <vaadin-grid-column slot="column-slot">
-    <template class="header">Gender</template>
-    <template>[[item.gender]]</template>
-  </vaadin-grid-column>
-  <vaadin-grid-column slot="column-slot">
-    <template class="header">Eye Color</template>
-    <template>[[item.eyeColor]]</template>
-  </vaadin-grid-column>     
+  <!-- Add the vaadin-grid into the 'grid-slot' -->
+  <vaadin-grid slot="grid-slot">
+    <vaadin-grid-column>
+      <template class="header">Name</template>
+      <template>[[item.name]]</template>
+    </vaadin-grid-column>
+    <vaadin-grid-column>
+      <template class="header"><vaadin-grid-sorter path="gender">Gender</vaadin-grid-sorter></template>
+      <template>[[item.gender]]</template>
+    </vaadin-grid-column>
+    <vaadin-grid-column>
+      <template class="header">Eye Color</template>
+      <template>[[item.eyeColor]]</template>
+    </vaadin-grid-column>   
+  </vaadin-grid>     
 
 </sdl-srch-grid>
     <br><br><br>

@@ -1,4 +1,4 @@
-import {LitElement, html} from '@polymer/lit-element';
+import {LitElement, html} from '@polymer/lit-element/lit-element.js';
 import '@polymer/iron-form/iron-form.js';
 //import 'jquery/dist/jquery.min.js';
 import '@sdl-web/sdl-srch-bar/src/components/sdl-srch-bar.js';
@@ -24,22 +24,32 @@ class SdlSrchGrid extends LitElement {
     // console.log("sdl-srch-grid constructor called...")
     this.addEventListener('rendered', async (e) => {
       me.addEventListener("changed", function(e) {
-        let grid = this._root.querySelector('#vgrid');
+        let gridSlot = this._root.querySelector('#grid-slot');
+        let nodes = gridSlot.assignedNodes();
+        if (typeof nodes == 'undefined' || typeof nodes[0] == 'undefined' 
+            || typeof nodes[0].nodeName == 'undefined' || ! nodes[0].nodeName == "VAADIN-GRID") {
+          alert("Sorry, no vaadin grid was put into 'grid-slot'  -- Currently vaadin-grid is the only grid supported")
+          return 0;
+        }
 
+        let grid = nodes[0];
+        grid.expandAll = me.expandAll;
+        grid.url = me.url;
+        grid.formData = e.detail.formData;
+
+        // If they have 'hasChildren' field in their data we assume it is a tree
+        //  We provide the treeDataProvider for trees.
+        if (typeof e.detail.payload[0].hasChildren != 'undefined') {
           grid.allData = e.detail.payload;
-          //grid.items = e.detail.payload;
-          grid.url = me.url;
-          grid.formData = e.detail.formData;
-          grid.expandAll = me.expandAll;
-
-          if (typeof grid.dataProvider == 'undefined') {
-            grid.dataProvider = this._sdlDataProvider;
-          } 
+          grid.dataProvider = this._treeDataProvider;
+        } else {
+          grid.items = e.detail.payload;
+        }
       });
     });
   }
 
-  _sdlDataProvider(params, callback) {
+  _treeDataProvider(params, callback) {
     var grid = this;
     grid.filteredData = [];
 
@@ -88,9 +98,6 @@ class SdlSrchGrid extends LitElement {
 
   static get properties() { 
     return { 
-      theme: {
-        type: String
-      },
       url: {
         type: String
       }, 
@@ -102,11 +109,6 @@ class SdlSrchGrid extends LitElement {
 
   _render(props) {
     var me = this;
-    console.log(props,props.theme);
-
-    if (typeof props.theme == 'undefined') {
-      props.theme = "row-stripes";
-    }
 
     return html`
       <style>
@@ -119,10 +121,7 @@ class SdlSrchGrid extends LitElement {
         <slot name="search-slot"></slot>
       </sdl-srch-bar>
       
-      <vaadin-grid id='vgrid' theme='${props.theme}'>
-        <slot name='column-slot'></slot>
-      </vaadin-grid>
-
+      <slot id="grid-slot" name="grid-slot"></slot>
     `;
   }
 }
