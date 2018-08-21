@@ -2,10 +2,7 @@ import {LitElement, html} from '@polymer/lit-element/lit-element.js';
 import '@polymer/iron-form/iron-form.js';
 //import 'jquery/dist/jquery.min.js';
 import '@sdl-web/sdl-srch-bar/src/components/sdl-srch-bar.js';
-import '@vaadin/vaadin-grid/vaadin-grid.js';
-import '@vaadin/vaadin-grid/vaadin-grid-tree-toggle.js';
-import '@vaadin/vaadin-grid/vaadin-grid-sorter.js';
-import '@vaadin/vaadin-grid/vaadin-grid-selection-column.js';
+import '@vaadin/vaadin-grid/all-imports.js';
 
 /**
  * `sdl-srch-grid`

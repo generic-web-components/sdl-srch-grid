@@ -17,7 +17,7 @@
   </form>
 
   <!-- Add the vaadin-grid into the 'grid-slot' -->
-  <vaadin-grid slot="grid-slot">
+  <vaadin-grid theme="row-stripes" slot="grid-slot">
     <vaadin-grid-column>
       <template class="header">Name</template>
       <template>[[item.name]]</template>
@@ -37,7 +37,7 @@
 
     <script>
     addEventListener('DOMContentLoaded', function(){ 
-
+      console.log("DOM Content Loaded...");
 
       }, false);
 
