@@ -11,9 +11,6 @@
       import '@polymer/iron-demo-helpers/demo-pages-shared-styles.js';
       import '@polymer/iron-demo-helpers/demo-snippet.js';
       import '@polymer/paper-input/paper-input.js';
-      import '@polymer/iron-icons/iron-icons.js';
-      import '@polymer/iron-icon/iron-icon.js';
-      import '@polymer/iron-form/iron-form.js';
       import '@polymer/iron-pages/iron-pages.js';
       import '@vaadin/vaadin-tabs/vaadin-tabs.js';
     </script>
@@ -41,6 +38,7 @@
     <vaadin-tab>Select Column</vaadin-tab>
     <vaadin-tab>70,000 Records!</vaadin-tab>
     <vaadin-tab>Tree View</vaadin-tab>
+    <vaadin-tab>Editable Grid</vaadin-tab>
     <!-- <vaadin-tab>Google like</vaadin-tab> -->
   </vaadin-tabs>
 
@@ -83,7 +81,7 @@
     <vaadin-grid-column>
       <template class="header">Eye Color</template>
       <template>[[item.eyeColor]]</template>
-    </vaadin-grid-column>   
+    </vaadin-grid-column>  
   </vaadin-grid>  
 
 </sdl-srch-grid>
@@ -218,12 +216,15 @@
       </demo-snippet>
     </div>
     <div class="vertical-section-container centered">
-      <h1>Google like searching</h1>
+      <h1>Editable grid Example</h1>
+      <u>Note: Button clicks are intercepted in the 'grid-slot' and new events thrown to allow implementation of CRUD operations</u>  
+        <p><b>Events thrown:</b>   sdl-srch-grid-add, sdl-srch-grid-edit, sdl-srch-grid-delete, sdl-srch-grid-custom -- See Below..
+        </p>
     <demo-snippet>
       <template>         
 
 <!-- Now add sdl-srch-grid to html section -->
-<sdl-srch-grid id='srch-grid' url='./data/srch-data-8000.txt' theme="row-stripes">  
+<sdl-srch-grid id='srch-grid99' url='./data/srch-data-8000.txt'>  
 
 <!-- Put whatever input fields (and styling) you want into 'search-slot' -->
 <form slot="search-slot">
@@ -232,14 +233,8 @@
   </paper-input>
 </form>
 
-  <template class="row-details"  >
-    <div class="details">
-      <p>Hi! My name is [[item.name.first]]!<br><small>[[item.email]]</small></p>
-    </div>
-  </template>
-
   <!-- Add the vaadin-grid into the 'grid-slot' -->
-<vaadin-grid theme='row-stripes' slot="grid-slot">
+<vaadin-grid slot="grid-slot">
   <vaadin-grid-column>
     <template class="header">Id</template>
     <template>[[item._id]]</template>
@@ -255,10 +250,70 @@
   <vaadin-grid-column  >
     <template class="header">Eye Color</template>
     <template>[[item.eyeColor]]</template>
-  </vaadin-grid-column>     
+  </vaadin-grid-column>    
+  <vaadin-grid-column>
+    <template class="header">
+        <div style="text-align: right">
+            <!-- Note:  the id of an ADD button must start with 'add-'  -->
+            <vaadin-button id="add-button" theme="primary" aria-label="Add">Add</vaadin-button>
+          </div>  
+    </template> 
+    <template>
+      <div style="text-align: right">
+        <!-- Note:  the id of an EDIT button must start with 'edit-{any characters}-{_id of the record}'  -->
+        <vaadin-button id="edit-button-[[item._id]]" theme="secondary" aria-label="Edit">Edit</vaadin-button>
+      </div>
+      <div style="text-align: right">
+          <!-- Note:  the id of an DELETE button must start with 'delete-{any characters}-{_id of the record}'  -->
+          <vaadin-button id="delete-button-[[item._id]]" theme="secondary" aria-label="Delete">Delete</vaadin-button>
+        </div>
+    </template>
+  </vaadin-grid-column>  
 </vaadin-grid>
 
 </sdl-srch-grid>
+
+<script>
+
+// Note:  Listen for events from sdl-srch-grid to do Insert, Update & Delete
+addEventListener('sdl-srch-grid-edit', function(e) {
+  var grid = document.getElementById('srch-grid99');
+
+  // Bring up your own form window here to allow user to UPDATE a record.   
+  // On successful UPDATE to DB --  call grid.updateRecord() to update the grid.
+  e.detail.formData.name = "XXXX";
+  grid.updateRecord(e.detail.formData);
+  console.log("EDIT=",e);
+});
+
+addEventListener('sdl-srch-grid-add', function(e) {
+  var grid = document.getElementById('srch-grid99');
+
+  // Bring up your own INSERT window here to allow user to insert a record  
+  // On successful INSERT to DB --  call grid.insertRecord() to update the grid.
+  var rec = {_id: "99", name:"INSERT", gender: "ZZZ", eyeColor: "Blue"};
+  grid.insertRecord(rec);
+  console.log("ADD=",e);
+});
+
+addEventListener('sdl-srch-grid-delete', function(e) {
+  var grid = document.getElementById('srch-grid99');
+
+  // Optionally, you could bring up a "Are You Sure?" dialog before doing your own ajax call to delete the record
+  // then call grid.deleteRecord() to update the grid.
+  grid.deleteRecord(e.detail.formData);
+  console.log("DELETE=",e);
+});
+
+addEventListener('sdl-srch-grid-custom', function(e) {
+
+  // If you add a button that does not follow the button id naming convention of "add-", "edit-" or "delete-"
+  // Then the 'sdl-srch-grid-custom event will be thrown.  
+  // You will be able to deal with your custom button here.
+  // Note:  e.detail.formData will be filled in if you put the record _id at the end of your id name.
+  console.log("CUSTOM=",e);
+});
+</script>
 
       </template>
     </demo-snippet>
@@ -267,6 +322,8 @@
 
 
     <script>
+
+
 
     addEventListener('DOMContentLoaded', function(){ 
       console.log("Srch Grid Loaded...");

@@ -35,6 +35,33 @@
 </sdl-srch-grid>
     <br><br><br>
 
+
+
+<sdl-srch-grid id='srch-grid' url='./data/srch-data-tree.txt' expandall>  
+
+  <!-- Put whatever input fields (and styling) you want into 'search-slot' -->
+  <form slot="search-slot">
+    <input name="input1" label="Filter Search"></input>
+  </form>
+  <vaadin-grid slot="grid-slot">
+    <vaadin-grid-column  >
+      <template class="header">Name</template>
+          <template>
+            <vaadin-grid-tree-toggle leaf="[[!item.hasChildren]]" expanded="{{expanded}}" level="[[level]]">
+              [[item.name]]
+            </vaadin-grid-tree-toggle>
+          </template>
+    </vaadin-grid-column>
+    <vaadin-grid-column  >
+      <template class="header">Gender</template>
+      <template>[[item.gender]]</template>
+    </vaadin-grid-column>
+    <vaadin-grid-column  >
+      <template class="header">Eye Color</template>
+      <template>[[item.eyeColor]]</template>
+    </vaadin-grid-column>     
+  </vaadin-grid>    
+</sdl-srch-grid>
     <script>
     addEventListener('DOMContentLoaded', function(){ 
       console.log("DOM Content Loaded...");

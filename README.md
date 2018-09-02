@@ -1,29 +1,10 @@
 # \<sdl-srch-grid\>
 
-Generic Search Grid Element.  
+High End Generic Search Grid custom element.  
 
-Based on the high end vaadin grid component and sdl-srch-bar component.  You can specify the "url" to handle everything about the grid including loading and filtering.   
+Based on the high end vaadin grid component and sdl-srch-bar component.  You can specify the "url" to handle loading & filtering the grid data.    
 
-## Install the Polymer-CLI
-
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) and npm (packaged with [Node.js](https://nodejs.org)) installed. Run `npm install` to install your element's dependencies, then run `polymer serve` to serve your element locally.
-
-## Viewing Your Element In Development Mode
-
-```
-$ cd sdl-srch-grid
-$ polymer serve
-```
-
-## Build the sdl-srch-bar demo & component
-```
-$ ./sdlMake 
-```
-
-Once you run this build there will be two build directories created:  build-demo & build-component
-
-
-##  Run the es6 version of the Demo (Assuming you installed at SERVER_ROOT using npm)
+##  after downloading with npm -- Run the es6 version of the Demo (Assuming you installed at SERVER_ROOT using npm)
 ```
 {SERVER_ROOT}/node_modules/@sdl-web/sdl-srch-grid/build-demo/es6-bundled/demo/index.html
 ```

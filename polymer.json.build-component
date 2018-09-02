@@ -15,7 +15,8 @@
    "preset": "es6-bundled",
    "html": { "minify": false}, 
    "addServiceWorker": false 
-  }],
+  }
+],
   "moduleResolution": "node",
   "npm": true
 }

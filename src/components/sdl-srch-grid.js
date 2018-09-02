@@ -3,6 +3,7 @@ import '@polymer/iron-form/iron-form.js';
 //import 'jquery/dist/jquery.min.js';
 import '@sdl-web/sdl-srch-bar/src/components/sdl-srch-bar.js';
 import '@vaadin/vaadin-grid/all-imports.js';
+import '@vaadin/vaadin-button/vaadin-button.js';
 
 /**
  * `sdl-srch-grid`
@@ -20,16 +21,90 @@ class SdlSrchGrid extends LitElement {
 
     // console.log("sdl-srch-grid constructor called...")
     this.addEventListener('rendered', async (e) => {
-      me.addEventListener("changed", function(e) {
-        let gridSlot = this._root.querySelector('#grid-slot');
-        let nodes = gridSlot.assignedNodes();
-        if (typeof nodes == 'undefined' || typeof nodes[0] == 'undefined' 
-            || typeof nodes[0].nodeName == 'undefined' || ! nodes[0].nodeName == "VAADIN-GRID") {
-          alert("Sorry, no vaadin grid was put into 'grid-slot'  -- Currently vaadin-grid is the only grid supported")
-          return 0;
-        }
+      console.log("RENDERED...")
 
-        let grid = nodes[0];
+      var gridSlot = this._root.querySelector('#grid-slot');
+      var gridNodes = gridSlot.assignedNodes();
+      if (typeof gridNodes == 'undefined' || typeof gridNodes[0] == 'undefined' 
+          || typeof gridNodes[0].nodeName == 'undefined' || ! gridNodes[0].nodeName == "VAADIN-GRID") {
+        alert("Sorry, no vaadin grid was put into 'grid-slot'  -- Currently vaadin-grid is the only grid supported")
+        return 0;
+      }
+      var grid = gridNodes[0];
+      me.grid = grid;
+
+      grid.addEventListener('click', function(e){
+        if (typeof e.target !== 'undefined' && typeof e.target.tagName !== 'undefined' && e.target.tagName.match(/BUTTON/g)) {
+          var id = e.target.id;
+          if (typeof id === 'undefined') {
+            alert("Sorry, an 'id' has not been defined for a button");
+            return 0;           
+          }    
+          
+          switch (true) {
+              case /add-/.test(id):
+                console.log("ADD BUTTON clicked");
+                // Throw the Add Event.
+                // Then Bring up the Add Form if defined.
+                me.dispatchEvent(new CustomEvent('sdl-srch-grid-add', {
+                  bubbles: true,
+                  composed: true,
+                  detail: {
+                    target: e.target
+                  }
+                }));  
+                break;
+            case /edit-/.test(id):
+                var uniqueId = me._extractId(id);
+                console.log("EDIT BUTTON clicked  --> ID=",uniqueId); 
+                var recObj = grid.items.find(o => o._id === uniqueId);
+                // Find the record in the Data Array and return it in the event.
+                // If Edit Slot is filled in Bring up the form with data loaded.
+                me.dispatchEvent(new CustomEvent('sdl-srch-grid-edit', {
+                  bubbles: true,
+                  composed: true,
+                  detail: {
+                    target: e.target,
+                    formData: recObj
+                  }
+                })); 
+                break;
+            case /delete-/.test(id):
+                var uniqueId = me._extractId(id);
+                console.log("DELETE BUTTON clicked --> ID=", uniqueId); 
+                var recObj = grid.items.find(o => o._id === uniqueId);
+                // Send url with DELETE of this item.
+                me.dispatchEvent(new CustomEvent('sdl-srch-grid-delete', {
+                  bubbles: true,
+                  composed: true,
+                  detail: {
+                    target: e.target,
+                    formData: recObj
+                  }
+                }));       
+                break;
+            default:
+                var uniqueId = me._extractId(id);
+                console.log("CUSTOM BUTTON clicked --> ID=", uniqueId); 
+                console.log("Button 'id' does not follow 'add-', 'edit-', 'delete-' convention");
+                var recObj = grid.items.find(o => o._id === uniqueId);
+                // Send url with DELETE of this item.
+                me.dispatchEvent(new CustomEvent('sdl-srch-grid-custom', {
+                  bubbles: true,
+                  composed: true,
+                  detail: {
+                    target: e.target,
+                    formData: recObj
+                  }
+                }));       
+                break;
+          }
+        } 
+      });
+
+
+      me.addEventListener("changed", function(e) {
+
         grid.expandAll = me.expandAll;
         grid.url = me.url;
         grid.formData = e.detail.formData;
@@ -87,6 +162,28 @@ class SdlSrchGrid extends LitElement {
   _didRender(props, changedProps, prevProps) {
     console.log('_didRender');
     this.dispatchEvent(new CustomEvent('rendered'));  
+  }
+
+  _extractId(id){
+    var idParts = id.split("-");
+    return idParts[idParts.length-1];
+  }
+
+  updateRecord(record) {
+    var foundIndex = this.grid.items.findIndex(x => x._id == record._id);
+    this.grid.items[foundIndex] = record;
+    this.grid.clearCache();
+  }
+
+  insertRecord(record) {
+    this.grid.items.splice(0, 0, record);
+    this.grid.clearCache();
+  }
+
+  deleteRecord(record) {
+    var foundIndex = this.grid.items.findIndex(x => x._id == record._id);
+    this.grid.items.splice(foundIndex, 1);
+    this.grid.clearCache();
   }
 
   renderComplete() {
