@@ -19,6 +19,8 @@ class SdlSrchGrid extends LitElement {
     super();
     var me = this;
 
+    me._polyfill_Closest();
+
     // console.log("sdl-srch-grid constructor called...")
     this.addEventListener('rendered', async (e) => {
       console.log("RENDERED...")
@@ -32,6 +34,46 @@ class SdlSrchGrid extends LitElement {
       }
       var grid = gridNodes[0];
       me.grid = grid;
+
+      grid.addEventListener("mouseover", function(e) {  
+        var path = me._getEventPath(e);
+
+
+        // var tr = e.target.closest("tr");
+        if (typeof path !== 'undefined') {
+          for (var i=0; i<path.length; i++) {
+            if (/^TR$/.test(path[i].nodeName)) {
+              me.dispatchEvent(new CustomEvent('sdl-srch-grid-mouseover', {
+                bubbles: true,
+                composed: true,
+                detail: {
+                  target: path[i],
+                  formData: path[i]._item
+                }
+              }));  
+            }
+          }
+        }
+      });
+
+      grid.addEventListener("mouseout", function(e) {  
+        var path = me._getEventPath(e);
+        // var tr = e.target.closest("tr");
+        if (typeof path !== 'undefined') {
+          for (var i=0; i<path.length; i++) {
+            if (/^TR$/.test(path[i].nodeName)) {
+              me.dispatchEvent(new CustomEvent('sdl-srch-grid-mouseout', {
+                bubbles: true,
+                composed: true,
+                detail: {
+                  target: path[i],
+                  formData: path[i]._item
+                }
+              }));  
+            }
+          }
+        }
+      });
 
       grid.addEventListener('click', function(e){
         if (typeof e.target !== 'undefined' && typeof e.target.tagName !== 'undefined' && e.target.tagName.match(/BUTTON/g)) {
@@ -169,6 +211,97 @@ class SdlSrchGrid extends LitElement {
     return idParts[idParts.length-1];
   }
 
+
+  _getEventPath(evt) {
+    var path = (evt.composedPath && evt.composedPath()) || evt.path,
+        target = evt.target;
+
+    if (path != null) {
+        // Safari doesn't include Window, but it should.
+        return (path.indexOf(window) < 0) ? path.concat(window) : path;
+    }
+
+    if (target === window) {
+        return [window];
+    }
+
+    function getParents(node, memo) {
+        memo = memo || [];
+        var parentNode = node.parentNode;
+
+        if (!parentNode) {
+            return memo;
+        }
+        else {
+            return getParents(parentNode, memo.concat(parentNode));
+        }
+    }
+
+    return [target].concat(getParents(target), window);
+}
+
+  /**
+   * Get the closest matching element up the DOM tree.
+   * @private
+   * @param  {Element} elem     Starting element
+   * @param  {String}  selector Selector to match against
+   * @return {Boolean|Element}  Returns null if not match found
+   */
+    _getClosestUp  ( elem, selector ) {
+
+    // Element.matches() polyfill
+    if (!Element.prototype.matches) {
+      Element.prototype.matches =
+        Element.prototype.matchesSelector ||
+        Element.prototype.mozMatchesSelector ||
+        Element.prototype.msMatchesSelector ||
+        Element.prototype.oMatchesSelector ||
+        Element.prototype.webkitMatchesSelector ||
+        function(s) {
+          var matches = (this.document || this.ownerDocument).querySelectorAll(s),
+            i = matches.length;
+          while (--i >= 0 && matches.item(i) !== this) {}
+          return i > -1;
+        };
+    }
+
+    // Get closest match
+    for ( ; elem && elem !== document; elem = elem.parentNode ) {
+      console.log(elem.tagName,elem.path);
+      if ( elem.matches( selector )) return elem;
+    }
+    return null;
+  };
+
+
+  /**
+ * Element.closest() polyfill
+ * https://developer.mozilla.org/en-US/docs/Web/API/Element/closest#Polyfill
+ */
+_polyfill_Closest() {
+  if (!Element.prototype.closest) {
+    if (!Element.prototype.matches) {
+      Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+    }
+    Element.prototype.closest = function (s) {
+      var el = this;
+      var ancestor = this;
+      if (!document.documentElement.contains(el)) return null;
+      do {
+        if (ancestor.matches(s)) return ancestor;
+        ancestor = ancestor.parentElement;
+      } while (ancestor !== null);
+      return null;
+    };
+  }
+}
+
+
+  _getClosestDown (elem, selector) {
+    var firstElem = elem.querySelector(selector);
+    return firstElem;
+  }
+
   updateRecord(record) {
     var foundIndex = this.grid.items.findIndex(x => x._id == record._id);
     this.grid.items[foundIndex] = record;
@@ -208,6 +341,14 @@ class SdlSrchGrid extends LitElement {
       <style>
         :host {
           display: block;
+        }
+
+        .button-active {
+          opacity: 1
+        }
+
+        .button-inactive {
+          opacity: .05
         }
       </style>
 

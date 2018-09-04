@@ -12,6 +12,7 @@
       import '@polymer/iron-demo-helpers/demo-snippet.js';
       import '@polymer/paper-input/paper-input.js';
       import '@polymer/iron-pages/iron-pages.js';
+      import '@polymer/iron-icons/iron-icons.js';
       import '@vaadin/vaadin-tabs/vaadin-tabs.js';
     </script>
 
@@ -20,6 +21,14 @@
         .details {
           display: flex;
           font-size: 20px;
+        }
+
+        .active {
+          opacity: 1
+        }
+
+        .inactive {
+          opacity: .05
         }
 
         img {
@@ -218,8 +227,15 @@
     <div class="vertical-section-container centered">
       <h1>Editable grid Example</h1>
       <u>Note: Button clicks are intercepted in the 'grid-slot' and new events thrown to allow implementation of CRUD operations</u>  
-        <p><b>Events thrown:</b>   sdl-srch-grid-add, sdl-srch-grid-edit, sdl-srch-grid-delete, sdl-srch-grid-custom -- See Below..
-        </p>
+        <b>Events thrown:</b>   
+          <ul>
+            <li>sdl-srch-grid-add</li>
+            <li>sdl-srch-grid-edit</li>
+            <li>sdl-srch-grid-delete</li>
+            <li>sdl-srch-grid-custom</li>
+            <li>sdl-srch-grid-mouseover</li>
+            <li>sdl-srch-grid-mouseout</li>
+          </ul>
     <demo-snippet>
       <template>         
 
@@ -237,7 +253,7 @@
 <vaadin-grid slot="grid-slot">
   <vaadin-grid-column>
     <template class="header">Id</template>
-    <template>[[item._id]]</template>
+    <template style="height:200px">[[item._id]]</template>
   </vaadin-grid-column>
   <vaadin-grid-column  >
     <template class="header">Name</template>
@@ -253,20 +269,14 @@
   </vaadin-grid-column>    
   <vaadin-grid-column>
     <template class="header">
-        <div style="text-align: right">
             <!-- Note:  the id of an ADD button must start with 'add-'  -->
             <vaadin-button id="add-button" theme="primary" aria-label="Add">Add</vaadin-button>
-          </div>  
     </template> 
     <template>
-      <div style="text-align: right">
         <!-- Note:  the id of an EDIT button must start with 'edit-{any characters}-{_id of the record}'  -->
-        <vaadin-button id="edit-button-[[item._id]]" theme="secondary" aria-label="Edit">Edit</vaadin-button>
-      </div>
-      <div style="text-align: right">
+        <vaadin-button id="edit-button-[[item._id]]"  class="inactive" theme="icon"><iron-icon icon="icons:create" slot="prefix"></iron-icon></vaadin-button>
           <!-- Note:  the id of an DELETE button must start with 'delete-{any characters}-{_id of the record}'  -->
-          <vaadin-button id="delete-button-[[item._id]]" theme="secondary" aria-label="Delete">Delete</vaadin-button>
-        </div>
+        <vaadin-button id="delete-button-[[item._id]]"  class="inactive" theme="icon"><iron-icon icon="icons:clear" slot="prefix"></iron-icon></vaadin-button>
     </template>
   </vaadin-grid-column>  
 </vaadin-grid>
@@ -312,6 +322,38 @@ addEventListener('sdl-srch-grid-custom', function(e) {
   // You will be able to deal with your custom button here.
   // Note:  e.detail.formData will be filled in if you put the record _id at the end of your id name.
   console.log("CUSTOM=",e);
+});
+
+addEventListener('sdl-srch-grid-mouseover', function(e) {
+  var grid = document.getElementById('srch-grid99');
+
+  var buttons = grid.querySelectorAll(".active");
+  for(var i=0; i < buttons.length; i++) {
+    buttons[i].classList.remove('active');
+    buttons[i].classList.add('inactive');
+  }
+
+  if (typeof e.detail.formData != 'undefined' && typeof e.detail.formData._id != 'undefined') {
+    var editBtn = document.getElementById("edit-button-"+e.detail.formData._id);
+    var delBtn = document.getElementById("delete-button-"+e.detail.formData._id);
+    editBtn.classList.remove("inactive");
+    delBtn.classList.remove("inactive");
+    editBtn.classList.add("active");
+    delBtn.classList.add("active");
+  }
+});
+
+addEventListener('sdl-srch-grid-mouseout', function(e) {
+  var grid = document.getElementById('srch-grid99');
+
+  if (typeof e.detail.formData != 'undefined' && typeof e.detail.formData._id != 'udefined') {
+    var editBtn = document.getElementById("edit-button-"+e.detail.formData._id);
+    var delBtn = document.getElementById("delete-button-"+e.detail.formData._id);
+    editBtn.classList.remove("active");
+    delBtn.classList.remove("active");
+    editBtn.classList.add("inactive");
+    delBtn.classList.add("inactive");
+  }
 });
 </script>
 
