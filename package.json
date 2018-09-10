@@ -1,6 +1,6 @@
 {
   "name": "@sdl-web/sdl-srch-grid",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Advanced Search Grid",
   "main": "index.js",
   "repository": "git+https://github.com/generic-web-components/sdl-srch-grid.git",
@@ -8,16 +8,23 @@
   "license": "MIT",
   "dependencies": {
     "@polymer/iron-pages": "^3.0.0-pre.21",
-    "@polymer/lit-element": "^0.5.2",
-    "@sdl-web/sdl-srch-bar": "^1.0.13",
+    "@polymer/lit-element": "^0.6.0-dev.6",
+    "@sdl-web/sdl-srch-bar": "^1.0.14",
     "@vaadin/vaadin-button": "^2.1.0",
     "@vaadin/vaadin-grid": "^5.1.0-beta2",
     "@vaadin/vaadin-icons": "^4.2.0",
-    "@vaadin/vaadin-tabs": "^2.1.0-beta2",
-    "lit-element": "^0.5.0",
-    "lit-html": "^0.10.2"
+    "@vaadin/vaadin-tabs": "^2.1.0-beta2"
   },
-  "resolutions": {},
+  "resolutions": {
+    "@polymer/iron-icon": "3.0.0-pre.25",
+    "@polymer/lit-element": "0.6.0-dev.6",
+    "lit-html": "0.11.1",
+    "@vaadin/vaadin-element-mixin": "2.1.2",
+    "@vaadin/vaadin-development-mode-detector": "2.0.0",
+    "@vaadin/vaadin-usage-statistics": "2.0.1",
+    "@polymer/iron-flex-layout": "3.0.0-pre.25",
+    "@polymer/iron-meta": "3.0.0-pre.25"
+  },
   "devDependencies": {
     "@polymer/iron-demo-helpers": "^3.0.0-pre.21",
     "@polymer/iron-icon": "^3.0.0-pre.25",

@@ -25,7 +25,7 @@ class SdlSrchGrid extends LitElement {
     this.addEventListener('rendered', async (e) => {
       console.log("RENDERED...")
 
-      var gridSlot = this._root.querySelector('#grid-slot');
+      var gridSlot = this.shadowRoot.querySelector('#grid-slot');
       var gridNodes = gridSlot.assignedNodes();
       if (typeof gridNodes == 'undefined' || typeof gridNodes[0] == 'undefined' 
           || typeof gridNodes[0].nodeName == 'undefined' || ! gridNodes[0].nodeName == "VAADIN-GRID") {
@@ -201,8 +201,8 @@ class SdlSrchGrid extends LitElement {
     callback(pageItems, treeLevelSize);
   }
 
-  _didRender(props, changedProps, prevProps) {
-    console.log('_didRender');
+  firstUpdated(properties) {
+    console.log("updated...");
     this.dispatchEvent(new CustomEvent('rendered'));  
   }
 
@@ -334,7 +334,7 @@ _polyfill_Closest() {
     }
   }
 
-  _render(props) {
+  render() {
     var me = this;
 
     return html`
@@ -352,7 +352,7 @@ _polyfill_Closest() {
         }
       </style>
 
-      <sdl-srch-bar id="srch-bar" ajaxUrl=${props.url}>
+      <sdl-srch-bar id="srch-bar" ajaxUrl=${me.url}>
         <slot name="search-slot"></slot>
       </sdl-srch-bar>
       

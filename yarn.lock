@@ -51,13 +51,7 @@
     "@polymer/polymer" "^3.0.0"
     "@polymer/prism-element" "^3.0.0-pre.21"
 
-"@polymer/iron-flex-layout@^3.0.0-pre.21":
-  version "3.0.0-pre.21"
-  resolved "https://registry.yarnpkg.com/@polymer/iron-flex-layout/-/iron-flex-layout-3.0.0-pre.21.tgz#064bccb85ec2091b66366970e8867d3de7bb273d"
-  dependencies:
-    "@polymer/polymer" "^3.0.0"
-
-"@polymer/iron-flex-layout@^3.0.0-pre.24":
+"@polymer/iron-flex-layout@3.0.0-pre.25", "@polymer/iron-flex-layout@^3.0.0-pre.21", "@polymer/iron-flex-layout@^3.0.0-pre.24":
   version "3.0.0-pre.25"
   resolved "https://registry.yarnpkg.com/@polymer/iron-flex-layout/-/iron-flex-layout-3.0.0-pre.25.tgz#b4a01c244cc0bcaf8f4fad3e7727b66e06874089"
   dependencies:
@@ -76,15 +70,7 @@
     "@polymer/iron-ajax" "^3.0.0-pre.21"
     "@polymer/polymer" "^3.0.0"
 
-"@polymer/iron-icon@^3.0.0-pre.18", "@polymer/iron-icon@^3.0.0-pre.21":
-  version "3.0.0-pre.21"
-  resolved "https://registry.yarnpkg.com/@polymer/iron-icon/-/iron-icon-3.0.0-pre.21.tgz#5ef3e483f02823778e99c1b5e16ddac472b5dce5"
-  dependencies:
-    "@polymer/iron-flex-layout" "^3.0.0-pre.21"
-    "@polymer/iron-meta" "^3.0.0-pre.21"
-    "@polymer/polymer" "^3.0.0"
-
-"@polymer/iron-icon@^3.0.0-pre.25":
+"@polymer/iron-icon@3.0.0-pre.25", "@polymer/iron-icon@^3.0.0-pre.18", "@polymer/iron-icon@^3.0.0-pre.21", "@polymer/iron-icon@^3.0.0-pre.25":
   version "3.0.0-pre.25"
   resolved "https://registry.yarnpkg.com/@polymer/iron-icon/-/iron-icon-3.0.0-pre.25.tgz#c5bdb739b4461acca8de81657ccd976a89492ffe"
   dependencies:
@@ -121,13 +107,7 @@
   dependencies:
     "@polymer/polymer" "^3.0.0"
 
-"@polymer/iron-meta@^3.0.0-pre.21":
-  version "3.0.0-pre.21"
-  resolved "https://registry.yarnpkg.com/@polymer/iron-meta/-/iron-meta-3.0.0-pre.21.tgz#e74ab386a1b490031e329f7ec032316bec24fa2a"
-  dependencies:
-    "@polymer/polymer" "^3.0.0"
-
-"@polymer/iron-meta@^3.0.0-pre.24":
+"@polymer/iron-meta@3.0.0-pre.25", "@polymer/iron-meta@^3.0.0-pre.21", "@polymer/iron-meta@^3.0.0-pre.24":
   version "3.0.0-pre.25"
   resolved "https://registry.yarnpkg.com/@polymer/iron-meta/-/iron-meta-3.0.0-pre.25.tgz#c95c44cbda572b6753cea2f022f94c67d5f698a0"
   dependencies:
@@ -166,12 +146,11 @@
     "@polymer/iron-meta" "^3.0.0-pre.21"
     "@polymer/polymer" "^3.0.0"
 
-"@polymer/lit-element@^0.5.2":
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/@polymer/lit-element/-/lit-element-0.5.2.tgz#8d4e2d1ada27cf0f1a38b7b0eb9fadae92eb63df"
+"@polymer/lit-element@0.6.0-dev.6", "@polymer/lit-element@^0.6.0-dev.6":
+  version "0.6.0-dev.6"
+  resolved "https://registry.yarnpkg.com/@polymer/lit-element/-/lit-element-0.6.0-dev.6.tgz#d60d01061300c8059d9dde3a9c14e03777b6a35d"
   dependencies:
-    "@polymer/polymer" "^3.0.2"
-    lit-html "^0.10.0"
+    lit-html "^0.11.0"
 
 "@polymer/marked-element@^3.0.0-pre.21":
   version "3.0.0-pre.21"
@@ -200,7 +179,7 @@
     "@polymer/iron-flex-layout" "^3.0.0-pre.21"
     "@polymer/polymer" "^3.0.0"
 
-"@polymer/polymer@^3.0.0", "@polymer/polymer@^3.0.0-pre.13", "@polymer/polymer@^3.0.2":
+"@polymer/polymer@^3.0.0", "@polymer/polymer@^3.0.0-pre.13":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@polymer/polymer/-/polymer-3.0.2.tgz#626e6f9fae9716b0962ce0211e21df242153eab2"
   dependencies:
@@ -213,13 +192,13 @@
     "@polymer/polymer" "^3.0.0"
     prismjs "^1.11.0"
 
-"@sdl-web/sdl-srch-bar@^1.0.11":
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/@sdl-web/sdl-srch-bar/-/sdl-srch-bar-1.0.11.tgz#db3593cd9f6ebb0731b3c7248774086f07608017"
+"@sdl-web/sdl-srch-bar@^1.0.14":
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/@sdl-web/sdl-srch-bar/-/sdl-srch-bar-1.0.14.tgz#519b01e003e765413c521c479259fe844efc4bdd"
   dependencies:
     "@polymer/iron-ajax" "^3.0.0-pre.21"
     "@polymer/iron-form" "^3.0.0-pre.21"
-    "@polymer/lit-element" "^0.5.2"
+    "@polymer/lit-element" "^0.6.0-dev.6"
     "@polymer/polymer" "^3.0.0-pre.13"
     jquery "^3.3.1"
 
@@ -251,25 +230,11 @@
   dependencies:
     "@polymer/polymer" "^3.0.0"
 
-"@vaadin/vaadin-development-mode-detector@^1.1.0-beta1":
-  version "1.1.0-beta1"
-  resolved "https://registry.yarnpkg.com/@vaadin/vaadin-development-mode-detector/-/vaadin-development-mode-detector-1.1.0-beta1.tgz#11d68ce917c6e68f7f78695ac70cab1c4eb028dc"
-  dependencies:
-    "@polymer/polymer" "^3.0.0"
-
-"@vaadin/vaadin-development-mode-detector@^2.0.0":
+"@vaadin/vaadin-development-mode-detector@2.0.0", "@vaadin/vaadin-development-mode-detector@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@vaadin/vaadin-development-mode-detector/-/vaadin-development-mode-detector-2.0.0.tgz#69417cbf4a9f7427ec7b70b7dc8e0605a2f900b3"
 
-"@vaadin/vaadin-element-mixin@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@vaadin/vaadin-element-mixin/-/vaadin-element-mixin-1.1.2.tgz#9b22db39992d4d469b2b6a2074bb5be5668877e3"
-  dependencies:
-    "@polymer/polymer" "^3.0.0"
-    "@vaadin/vaadin-development-mode-detector" "^1.1.0-beta1"
-    "@vaadin/vaadin-usage-statistics" "^1.1.0-beta1"
-
-"@vaadin/vaadin-element-mixin@^2.0.0":
+"@vaadin/vaadin-element-mixin@2.1.2", "@vaadin/vaadin-element-mixin@^1.1.2", "@vaadin/vaadin-element-mixin@^2.0.0":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@vaadin/vaadin-element-mixin/-/vaadin-element-mixin-2.1.2.tgz#f34421cc81e6aa3fdf688f0ba26f4a6ae030ad5e"
   dependencies:
@@ -360,13 +325,7 @@
   dependencies:
     "@polymer/polymer" "^3.0.0"
 
-"@vaadin/vaadin-usage-statistics@^1.1.0-beta1":
-  version "1.1.0-beta1"
-  resolved "https://registry.yarnpkg.com/@vaadin/vaadin-usage-statistics/-/vaadin-usage-statistics-1.1.0-beta1.tgz#5259cccb8028ea6e69a3066a83ce87d9b2a3860c"
-  dependencies:
-    "@polymer/polymer" "^3.0.0"
-
-"@vaadin/vaadin-usage-statistics@^2.0.1":
+"@vaadin/vaadin-usage-statistics@2.0.1", "@vaadin/vaadin-usage-statistics@^2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@vaadin/vaadin-usage-statistics/-/vaadin-usage-statistics-2.0.1.tgz#277e880c901521f8b763ed0f16ca6900ac6a9f43"
   dependencies:
@@ -402,15 +361,9 @@ jquery@^3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
-lit-element@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/lit-element/-/lit-element-0.5.0.tgz#88d42fba7bd8fab454f5bf2057973a5edee27010"
-  dependencies:
-    lit-html "^0.10.0"
-
-lit-html@^0.10.0, lit-html@^0.10.2:
-  version "0.10.2"
-  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-0.10.2.tgz#53c846afcf91bb1e6623179ef22e327ab8ac0e0e"
+lit-html@0.11.1, lit-html@^0.11.0:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-0.11.1.tgz#ad3dcfea1dbaf65fadf335fa1e2bd9ac19255394"
 
 marked@~0.3.9:
   version "0.3.19"
