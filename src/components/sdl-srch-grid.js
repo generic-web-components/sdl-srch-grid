@@ -77,14 +77,17 @@ class SdlSrchGrid extends LitElement {
 
       grid.addEventListener('click', function(e){
         if (typeof e.target !== 'undefined' && typeof e.target.tagName !== 'undefined' && e.target.tagName.match(/BUTTON/g)) {
-          var id = e.target.id;
-          if (typeof id === 'undefined') {
-            alert("Sorry, an 'id' has not been defined for a button");
+          var id = e.target.dataId;
+          var type = e.target.dataset.type;
+          if (typeof type === 'undefined') {
+            alert("Sorry, the 'data-type' attribute has not been defined for this button");
             return 0;           
           }    
+
+          console.log(e.target.dataId, e.target.dataset.type, e.target.dataset.type2);
           
           switch (true) {
-              case /add-/.test(id):
+              case /add/.test(type):
                 console.log("ADD BUTTON clicked");
                 // Throw the Add Event.
                 // Then Bring up the Add Form if defined.
@@ -96,8 +99,12 @@ class SdlSrchGrid extends LitElement {
                   }
                 }));  
                 break;
-            case /edit-/.test(id):
-                var uniqueId = me._extractId(id);
+            case /edit/.test(type):
+                var uniqueId = id
+                if (typeof uniqueId == 'undefined') {
+                  alert("Error, the 'data-id' attribute has not been defined for this button");
+                  return 0;
+                }
                 console.log("EDIT BUTTON clicked  --> ID=",uniqueId); 
                 var recObj = grid.items.find(o => o._id === uniqueId);
                 // Find the record in the Data Array and return it in the event.
@@ -111,8 +118,12 @@ class SdlSrchGrid extends LitElement {
                   }
                 })); 
                 break;
-            case /delete-/.test(id):
-                var uniqueId = me._extractId(id);
+            case /delete/.test(type):
+                var uniqueId = id
+                if (typeof uniqueId == 'undefined') {
+                  alert("Error, the 'data-id' attribute has not been defined for this button");
+                  return 0;
+                }
                 console.log("DELETE BUTTON clicked --> ID=", uniqueId); 
                 var recObj = grid.items.find(o => o._id === uniqueId);
                 // Send url with DELETE of this item.
@@ -125,8 +136,12 @@ class SdlSrchGrid extends LitElement {
                   }
                 }));       
                 break;
-            default:
-                var uniqueId = me._extractId(id);
+            case /custom/.test(type):
+                var uniqueId = id;
+                if (typeof uniqueId == 'undefined') {
+                  alert("Error, the 'data-id' attribute has not been defined for this button");
+                  return 0;
+                }
                 console.log("CUSTOM BUTTON clicked --> ID=", uniqueId); 
                 console.log("Button 'id' does not follow 'add-', 'edit-', 'delete-' convention");
                 var recObj = grid.items.find(o => o._id === uniqueId);
@@ -140,6 +155,9 @@ class SdlSrchGrid extends LitElement {
                   }
                 }));       
                 break;
+            default:
+              alert("Error, Invalid 'data-type' attribute for this button.   Valid 'data-type' attributes will contain one of the following strings:  'add', 'edit', 'delete', 'custom'");
+            return 0
           }
         } 
       });
@@ -240,39 +258,6 @@ class SdlSrchGrid extends LitElement {
     return [target].concat(getParents(target), window);
 }
 
-  /**
-   * Get the closest matching element up the DOM tree.
-   * @private
-   * @param  {Element} elem     Starting element
-   * @param  {String}  selector Selector to match against
-   * @return {Boolean|Element}  Returns null if not match found
-   */
-    _getClosestUp  ( elem, selector ) {
-
-    // Element.matches() polyfill
-    if (!Element.prototype.matches) {
-      Element.prototype.matches =
-        Element.prototype.matchesSelector ||
-        Element.prototype.mozMatchesSelector ||
-        Element.prototype.msMatchesSelector ||
-        Element.prototype.oMatchesSelector ||
-        Element.prototype.webkitMatchesSelector ||
-        function(s) {
-          var matches = (this.document || this.ownerDocument).querySelectorAll(s),
-            i = matches.length;
-          while (--i >= 0 && matches.item(i) !== this) {}
-          return i > -1;
-        };
-    }
-
-    // Get closest match
-    for ( ; elem && elem !== document; elem = elem.parentNode ) {
-      console.log(elem.tagName,elem.path);
-      if ( elem.matches( selector )) return elem;
-    }
-    return null;
-  };
-
 
   /**
  * Element.closest() polyfill
@@ -296,11 +281,6 @@ _polyfill_Closest() {
   }
 }
 
-
-  _getClosestDown (elem, selector) {
-    var firstElem = elem.querySelector(selector);
-    return firstElem;
-  }
 
   updateRecord(record) {
     var foundIndex = this.grid.items.findIndex(x => x._id == record._id);
@@ -341,14 +321,6 @@ _polyfill_Closest() {
       <style>
         :host {
           display: block;
-        }
-
-        .button-active {
-          opacity: 1
-        }
-
-        .button-inactive {
-          opacity: .05
         }
       </style>
 

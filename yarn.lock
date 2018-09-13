@@ -192,9 +192,9 @@
     "@polymer/polymer" "^3.0.0"
     prismjs "^1.11.0"
 
-"@sdl-web/sdl-srch-bar@^1.0.14":
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/@sdl-web/sdl-srch-bar/-/sdl-srch-bar-1.0.14.tgz#519b01e003e765413c521c479259fe844efc4bdd"
+"@sdl-web/sdl-srch-bar@^1.0.16":
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/@sdl-web/sdl-srch-bar/-/sdl-srch-bar-1.0.16.tgz#dbec04df5897f765c3fe129e657c2bd1eb09d8e4"
   dependencies:
     "@polymer/iron-ajax" "^3.0.0-pre.21"
     "@polymer/iron-form" "^3.0.0-pre.21"

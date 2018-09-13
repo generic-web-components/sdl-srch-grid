@@ -23,12 +23,12 @@
           font-size: 20px;
         }
 
-        .active {
-          opacity: 1
+        .active .row-action {
+          opacity: 1;
         }
 
-        .inactive {
-          opacity: .05
+        .inactive .row-action {
+          opacity: .10;
         }
 
         img {
@@ -269,14 +269,23 @@
   </vaadin-grid-column>    
   <vaadin-grid-column>
     <template class="header">
-            <!-- Note:  the id of an ADD button must start with 'add-'  -->
-            <vaadin-button id="add-button" theme="primary" aria-label="Add">Add</vaadin-button>
+            <!-- Note:  you must define a 'data-type' attribute which contains the word 'add' in it to trigger the sdl-srch-grid-add event.  -->
+            <vaadin-button data-type="add-button" theme="primary" aria-label="Add">Add</vaadin-button>
     </template> 
     <template>
-        <!-- Note:  the id of an EDIT button must start with 'edit-{any characters}-{_id of the record}'  -->
-        <vaadin-button id="edit-button-[[item._id]]"  class="inactive" theme="icon"><iron-icon icon="icons:create" slot="prefix"></iron-icon></vaadin-button>
-          <!-- Note:  the id of an DELETE button must start with 'delete-{any characters}-{_id of the record}'  -->
-        <vaadin-button id="delete-button-[[item._id]]"  class="inactive" theme="icon"><iron-icon icon="icons:clear" slot="prefix"></iron-icon></vaadin-button>
+        <!-- Note:  Here we id a container item that we can select later to active/inactive
+                    below each button is given an row-action class so we can apply css to activate/inactive all the elements using opacity -->
+        <div id="action_container[[item._id]]" class="inactive">
+        <!-- Note:  you must define a 'data-type' attribute which contains the word 'edit' in it to trigger the sdl-srch-grid-edit event.  -->
+        <!-- Note:  you also must define a 'data-id' attribute which contains the unqiue _id of the record -->
+        <vaadin-button class="row-action" data-type="edit" data-id=[[item._id]]  theme="icon"><iron-icon icon="icons:create" slot="prefix"></iron-icon></vaadin-button>
+
+        <!-- Note:  you must define a 'data-type' attribute which contains the word 'delete' in it to trigger the sdl-srch-grid-delete event.  -->
+        <!-- Note:  you also must define a 'data-id' attribute which contains the unqiue _id of the record -->
+        <vaadin-button class="row-action" data-type="delete" data-id=[[item._id]] theme="icon"><iron-icon icon="icons:clear" slot="prefix"></iron-icon></vaadin-button>
+
+        <!-- Also Note:  you can define a 'data-type' attribute which contains the word 'custom' if you want to trigger sdl-srch-grid-custom event -- to do some custom action -->
+      </div>
     </template>
   </vaadin-grid-column>  
 </vaadin-grid>
@@ -327,37 +336,27 @@ addEventListener('sdl-srch-grid-custom', function(e) {
 addEventListener('sdl-srch-grid-mouseover', function(e) {
   var grid = document.getElementById('srch-grid99');
 
-  var buttons = grid.querySelectorAll(".active");
-  for(var i=0; i < buttons.length; i++) {
-    buttons[i].classList.remove('active');
-    buttons[i].classList.add('inactive');
+  // Need to clean up any items that are active -- because mouseout does not always fire...
+  var rows = grid.querySelectorAll(".active");
+  for(var i=0; i < rows.length; i++) {
+    rows[i].classList.remove('active');
+    rows[i].classList.add('inactive');
   }
 
   if (typeof e.detail.formData != 'undefined' && typeof e.detail.formData._id != 'undefined') {
-    var editBtn = document.getElementById("edit-button-"+e.detail.formData._id);
-    var delBtn = document.getElementById("delete-button-"+e.detail.formData._id);
-    if (editBtn != null && delBtn != null) {
-      editBtn.classList.remove("inactive");
-      delBtn.classList.remove("inactive");
-      editBtn.classList.add("active");
-      delBtn.classList.add("active");
-    }
-
+    var container = document.getElementById('action_container'+e.detail.formData._id);
+    container.classList.remove('inactive');
+    container.classList.add('active');
   }
 });
 
 addEventListener('sdl-srch-grid-mouseout', function(e) {
   var grid = document.getElementById('srch-grid99');
 
-  if (typeof e.detail.formData != 'undefined' && typeof e.detail.formData._id != 'udefined') {
-    var editBtn = document.getElementById("edit-button-"+e.detail.formData._id);
-    var delBtn = document.getElementById("delete-button-"+e.detail.formData._id);
-    if (editBtn != null && delBtn != null) {
-      editBtn.classList.remove("active");
-      delBtn.classList.remove("active");
-      editBtn.classList.add("inactive");
-      delBtn.classList.add("inactive");
-    }
+  if (typeof e.detail.formData != 'undefined' && typeof e.detail.formData._id != 'undefined') {
+    var container = document.getElementById('action_container'+e.detail.formData._id);
+    container.classList.remove('active');
+    container.classList.add('inactive');
   }
 });
 </script>
