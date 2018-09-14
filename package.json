@@ -1,6 +1,6 @@
 {
   "name": "@sdl-web/sdl-srch-grid",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Advanced Search Grid",
   "main": "index.js",
   "repository": "git+https://github.com/generic-web-components/sdl-srch-grid.git",
