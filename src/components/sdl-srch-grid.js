@@ -1,4 +1,5 @@
 import {LitElement, html} from '@polymer/lit-element/lit-element.js';
+import {classString, styleString} from '@polymer/lit-element/lib/render-helpers.js';
 import '@polymer/iron-form/iron-form.js';
 //import 'jquery/dist/jquery.min.js';
 import '@sdl-web/sdl-srch-bar/src/components/sdl-srch-bar.js';
@@ -195,7 +196,7 @@ class SdlSrchGrid extends LitElement {
         // So, Get only the records that match the parentItem.
         if (grid.allData[i].parentItem == params.parentItem._id) {
           grid.filteredData.push(grid.allData[i]); 
-          if (typeof grid.expandAll != 'undefined' && grid.expandAll) {
+          if (typeof grid.expandAll != 'undefined' && grid.expandAll.match(/^t/i)) {
             grid.expandedItems.push(grid.allData[i]);
           }
         }
@@ -205,7 +206,7 @@ class SdlSrchGrid extends LitElement {
         if (typeof grid.allData[i].parentItem == 'undefined' || grid.allData[i].parentItem == '' 
               || grid.allData[i].parentItem == null || grid.allData[i].parentItem == 'null' ) {
           grid.filteredData.push(grid.allData[i]); 
-          if (typeof grid.expandAll != 'undefined' && grid.expandAll) {
+          if (typeof grid.expandAll != 'undefined' && grid.expandAll.match(/^t/i)) {
             grid.expandedItems.push(grid.allData[i]);
           }
         }
@@ -309,7 +310,13 @@ _polyfill_Closest() {
         type: String
       }, 
       expandAll: {
-        type: Boolean
+        type: String
+      },
+      autoLoad: {
+        type: String
+      },
+      onChangeOnly: {
+        type: String
       }
     }
   }
@@ -317,16 +324,18 @@ _polyfill_Closest() {
   render() {
     var me = this;
 
+    console.log("AUTOLOAD=",me.autoLoad);
+    console.log("ONCHANGEONLY",me.onChangeOnly);
+
     return html`
       <style>
         :host {
           display: block;
         }
       </style>
-
-      <sdl-srch-bar id="srch-bar" ajaxUrl=${me.url}>
-        <slot name="search-slot"></slot>
-      </sdl-srch-bar>
+          <sdl-srch-bar id="srch-bar" ajaxUrl=${me.url} autoLoad="${me.autoLoad}" onChangeOnly=${me.onChangeOnly}>
+            <slot name="search-slot"></slot>
+          </sdl-srch-bar>
       
       <slot id="grid-slot" name="grid-slot"></slot>
     `;

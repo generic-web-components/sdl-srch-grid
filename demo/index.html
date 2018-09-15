@@ -54,7 +54,7 @@
   <iron-pages id="pages">
 
     <div class="vertical-section-container centered">
-      <h1>Basic sdl-srch-grid demo (using slots)</h1>
+      <h1>Basic sdl-srch-grid demo (using slots) with autoload="false"</h1>
       <p><u>Note: Type in search field to generate ajax call(s) to server.</u>  
         Notice you can use any input type fields in the slot as well as any formatting you wish.  We are using txt files for the ajax so don't be worried about the filtering not working;)</p>
       <demo-snippet>
@@ -67,7 +67,7 @@
 <!-- <script type="import" src="@sdl-web/sdl-srch-grid/src/components/sdl-srch-grid.js"></script>  -->
 
 <!-- Now add sdl-srch-grid to html section -->
-<sdl-srch-grid id='srch-grid' url='./data/srch-data-8000.txt'>  
+<sdl-srch-grid id='srch-grid' url='./data/srch-data-8000.txt' autoload="false">  
 
   <!-- Put whatever input fields (and styling) you want into 'search-slot' -->
   <form slot="search-slot">
@@ -100,7 +100,8 @@
     </div>
 
     <div class="vertical-section-container centered">
-        <h1>Adding in a Selection Column with row-stripes</h1>
+        <h1>Adding in a Selection Column with row-stripes w/autoLoad="false" & onChangeOnly="true"</h1>
+        <p>Note:  You will have to type into the search field and hit enter to trigger the onchange/ajax request  </p>
         <demo-snippet>
           <template>         
   
@@ -111,7 +112,7 @@
   <!-- <script type="import" src="@sdl-web/sdl-srch-grid/src/components/sdl-srch-grid.js"></script>  -->
   
   <!-- Now add sdl-srch-grid to html section -->
-  <sdl-srch-grid id='srch-grid' url='./data/srch-data-8000.txt'>  
+  <sdl-srch-grid id='srch-grid' url='./data/srch-data-8000.txt' autoLoad="false" onChangeOnly="true">  
   
     <!-- Put whatever input fields (and styling) you want into 'search-slot' -->
     <form slot="search-slot">
@@ -144,11 +145,12 @@
 
     <div class="vertical-section-container centered">
         <h1>Smooth scrooling with 70,000 records!</h1>
+        <p>Note: You need to type in search feild below to fill the grid -- because autoload="false"</p>
       <demo-snippet>
         <template>         
 
 <!-- Now add sdl-srch-grid to html section -->
-<sdl-srch-grid id='srch-grid' url='./data/srch-data-70000.txt'>  
+<sdl-srch-grid id='srch-grid' url='./data/srch-data-70000.txt' autoload="false">  
 
   <!-- Put whatever input fields (and styling) you want into 'search-slot' -->
   <form slot="search-slot">
@@ -190,7 +192,7 @@
         <template>         
 
 <!-- Now add sdl-srch-grid to html section -->
-<sdl-srch-grid id='srch-grid'  url='./data/srch-data-tree.txt' expandall>  
+<sdl-srch-grid id='srch-grid'  url='./data/srch-data-tree.txt' expandall="true" autoload="false">  
 
   <!-- Put whatever input fields (and styling) you want into 'search-slot' -->
   <form slot="search-slot">
@@ -240,7 +242,7 @@
       <template>         
 
 <!-- Now add sdl-srch-grid to html section -->
-<sdl-srch-grid id='srch-grid99' url='./data/srch-data-8000.txt'>  
+<sdl-srch-grid id='srch-grid99' url='./data/srch-data-8000.txt' autoload="true">  
 
 <!-- Put whatever input fields (and styling) you want into 'search-slot' -->
 <form slot="search-slot">
