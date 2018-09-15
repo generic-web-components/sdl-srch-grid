@@ -1,7 +1,5 @@
 import {LitElement, html} from '@polymer/lit-element/lit-element.js';
-import {classString, styleString} from '@polymer/lit-element/lib/render-helpers.js';
 import '@polymer/iron-form/iron-form.js';
-//import 'jquery/dist/jquery.min.js';
 import '@sdl-web/sdl-srch-bar/src/components/sdl-srch-bar.js';
 import '@vaadin/vaadin-grid/all-imports.js';
 import '@vaadin/vaadin-button/vaadin-button.js';
@@ -19,6 +17,10 @@ class SdlSrchGrid extends LitElement {
   constructor() {
     super();
     var me = this;
+
+    if (typeof me.autoLoad == 'undefined') { me.autoLoad = "false"; }
+    if (typeof me.onChangeOnly == 'undefined') { me.onChangeOnly = "false"; }
+    if (typeof me.expandAll == 'undefined') { me.expandAll = "false"; }
 
     me._polyfill_Closest();
 
@@ -324,9 +326,9 @@ _polyfill_Closest() {
   render() {
     var me = this;
 
-    console.log("AUTOLOAD=",me.autoLoad);
-    console.log("ONCHANGEONLY",me.onChangeOnly);
-
+    console.log("autoLoad=",me.autoLoad);
+    console.log("onChangeOnly=",me.onChangeOnly);
+    
     return html`
       <style>
         :host {
