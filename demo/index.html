@@ -146,11 +146,12 @@
     <div class="vertical-section-container centered">
         <h1>Smooth scrooling with 70,000 records!</h1>
         <p>Note: You need to type in search feild below to fill the grid -- because autoload="false"</p>
+        <p>Note: ajaxObjName="search" puts the formdata into an array object called 'search'</p>
       <demo-snippet>
         <template>         
 
 <!-- Now add sdl-srch-grid to html section -->
-<sdl-srch-grid id='srch-grid' url='./data/srch-data-70000.txt' autoload="false"  onChangeOnly="false">  
+<sdl-srch-grid id='srch-grid' url='./data/srch-data-70000.txt' autoload="false"  onChangeOnly="false" ajaxObjName="search">  
 
   <!-- Put whatever input fields (and styling) you want into 'search-slot' -->
   <form slot="search-slot">

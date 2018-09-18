@@ -311,6 +311,9 @@ _polyfill_Closest() {
       url: {
         type: String
       }, 
+      ajaxObjName: {
+        type: String
+      },
       expandAll: {
         type: String
       },
@@ -326,16 +329,17 @@ _polyfill_Closest() {
   render() {
     var me = this;
 
-    console.log("autoLoad=",me.autoLoad);
-    console.log("onChangeOnly=",me.onChangeOnly);
-    
+    if (typeof me.ajaxObjName === 'undefined') {
+      me.ajaxObjName = "";
+    }
+
     return html`
       <style>
         :host {
           display: block;
         }
       </style>
-          <sdl-srch-bar id="srch-bar" ajaxUrl=${me.url} autoLoad="${me.autoLoad}" onChangeOnly=${me.onChangeOnly}>
+          <sdl-srch-bar id="srch-bar" ajaxUrl=${me.url} autoLoad="${me.autoLoad}" onChangeOnly=${me.onChangeOnly} ajaxObjName=${me.ajaxObjName}>
             <slot name="search-slot"></slot>
           </sdl-srch-bar>
       
