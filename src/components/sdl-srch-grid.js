@@ -32,155 +32,157 @@ class SdlSrchGrid extends LitElement {
       var gridNodes = gridSlot.assignedNodes();
       if (typeof gridNodes == 'undefined' || typeof gridNodes[0] == 'undefined' 
           || typeof gridNodes[0].nodeName == 'undefined' || ! gridNodes[0].nodeName == "VAADIN-GRID") {
-        alert("Sorry, no vaadin grid was put into 'grid-slot'  -- Currently vaadin-grid is the only grid supported")
-        return 0;
-      }
-      var grid = gridNodes[0];
-      me.grid = grid;
-
-      grid.addEventListener("mouseover", function(e) {  
-        var path = me._getEventPath(e);
-
-
-        // var tr = e.target.closest("tr");
-        if (typeof path !== 'undefined') {
-          for (var i=0; i<path.length; i++) {
-            if (/^TR$/.test(path[i].nodeName)) {
-              me.dispatchEvent(new CustomEvent('sdl-srch-grid-mouseover', {
-                bubbles: true,
-                composed: true,
-                detail: {
-                  target: path[i],
-                  formData: path[i]._item
-                }
-              }));  
-            }
-          }
-        }
-      });
-
-      grid.addEventListener("mouseout", function(e) {  
-        var path = me._getEventPath(e);
-        // var tr = e.target.closest("tr");
-        if (typeof path !== 'undefined') {
-          for (var i=0; i<path.length; i++) {
-            if (/^TR$/.test(path[i].nodeName)) {
-              me.dispatchEvent(new CustomEvent('sdl-srch-grid-mouseout', {
-                bubbles: true,
-                composed: true,
-                detail: {
-                  target: path[i],
-                  formData: path[i]._item
-                }
-              }));  
-            }
-          }
-        }
-      });
-
-      grid.addEventListener('click', function(e){
-        if (typeof e.target !== 'undefined' && typeof e.target.tagName !== 'undefined' && e.target.tagName.match(/BUTTON/g)) {
-          var id = e.target.dataId;
-          var type = e.target.dataset.type;
-          if (typeof type === 'undefined') {
-            alert("Sorry, the 'data-type' attribute has not been defined for this button");
-            return 0;           
-          }    
-
-          console.log(e.target.dataId, e.target.dataset.type, e.target.dataset.type2);
-          
-          switch (true) {
-              case /add/.test(type):
-                console.log("ADD BUTTON clicked");
-                // Throw the Add Event.
-                // Then Bring up the Add Form if defined.
-                me.dispatchEvent(new CustomEvent('sdl-srch-grid-add', {
+            console.log("No Vaadin Grid was put into 'grid-slot' ");
+        // alert("Sorry, no vaadin grid was put into 'grid-slot'  -- Currently vaadin-grid is the only grid supported")
+        // return 0;
+      } else {
+        var grid = gridNodes[0];
+        me.grid = grid;
+  
+        grid.addEventListener("mouseover", function(e) {  
+          var path = me._getEventPath(e);
+  
+  
+          // var tr = e.target.closest("tr");
+          if (typeof path !== 'undefined') {
+            for (var i=0; i<path.length; i++) {
+              if (/^TR$/.test(path[i].nodeName)) {
+                me.dispatchEvent(new CustomEvent('sdl-srch-grid-mouseover', {
                   bubbles: true,
                   composed: true,
                   detail: {
-                    target: e.target
+                    target: path[i],
+                    formData: path[i]._item
                   }
                 }));  
-                break;
-            case /edit/.test(type):
-                var uniqueId = id
-                if (typeof uniqueId == 'undefined') {
-                  alert("Error, the 'data-id' attribute has not been defined for this button");
-                  return 0;
-                }
-                console.log("EDIT BUTTON clicked  --> ID=",uniqueId); 
-                var recObj = grid.items.find(o => o._id === uniqueId);
-                // Find the record in the Data Array and return it in the event.
-                // If Edit Slot is filled in Bring up the form with data loaded.
-                me.dispatchEvent(new CustomEvent('sdl-srch-grid-edit', {
-                  bubbles: true,
-                  composed: true,
-                  detail: {
-                    target: e.target,
-                    formData: recObj
-                  }
-                })); 
-                break;
-            case /delete/.test(type):
-                var uniqueId = id
-                if (typeof uniqueId == 'undefined') {
-                  alert("Error, the 'data-id' attribute has not been defined for this button");
-                  return 0;
-                }
-                console.log("DELETE BUTTON clicked --> ID=", uniqueId); 
-                var recObj = grid.items.find(o => o._id === uniqueId);
-                // Send url with DELETE of this item.
-                me.dispatchEvent(new CustomEvent('sdl-srch-grid-delete', {
-                  bubbles: true,
-                  composed: true,
-                  detail: {
-                    target: e.target,
-                    formData: recObj
-                  }
-                }));       
-                break;
-            case /custom/.test(type):
-                var uniqueId = id;
-                if (typeof uniqueId == 'undefined') {
-                  alert("Error, the 'data-id' attribute has not been defined for this button");
-                  return 0;
-                }
-                console.log("CUSTOM BUTTON clicked --> ID=", uniqueId); 
-                console.log("Button 'id' does not follow 'add-', 'edit-', 'delete-' convention");
-                var recObj = grid.items.find(o => o._id === uniqueId);
-                // Send url with DELETE of this item.
-                me.dispatchEvent(new CustomEvent('sdl-srch-grid-custom', {
-                  bubbles: true,
-                  composed: true,
-                  detail: {
-                    target: e.target,
-                    formData: recObj
-                  }
-                }));       
-                break;
-            default:
-              alert("Error, Invalid 'data-type' attribute for this button.   Valid 'data-type' attributes will contain one of the following strings:  'add', 'edit', 'delete', 'custom'");
-            return 0
+              }
+            }
           }
-        } 
-      });
-
-
-      me.addEventListener("changed", function(e) {
-
-        grid.expandAll = me.expandAll;
-        grid.url = me.url;
-        grid.formData = e.detail.formData;
-
-        // If they have 'hasChildren' field in their data we assume it is a tree
-        //  We provide the treeDataProvider for trees.
-        if (typeof e.detail.payload[0].hasChildren != 'undefined') {
-          grid.allData = e.detail.payload;
-          grid.dataProvider = this._treeDataProvider;
-        } else {
-          grid.items = e.detail.payload;
-        }
-      });
+        });
+  
+        grid.addEventListener("mouseout", function(e) {  
+          var path = me._getEventPath(e);
+          // var tr = e.target.closest("tr");
+          if (typeof path !== 'undefined') {
+            for (var i=0; i<path.length; i++) {
+              if (/^TR$/.test(path[i].nodeName)) {
+                me.dispatchEvent(new CustomEvent('sdl-srch-grid-mouseout', {
+                  bubbles: true,
+                  composed: true,
+                  detail: {
+                    target: path[i],
+                    formData: path[i]._item
+                  }
+                }));  
+              }
+            }
+          }
+        });
+  
+        grid.addEventListener('click', function(e){
+          if (typeof e.target !== 'undefined' && typeof e.target.tagName !== 'undefined' && e.target.tagName.match(/BUTTON/g)) {
+            var id = e.target.dataId;
+            var type = e.target.dataset.type;
+            if (typeof type === 'undefined') {
+              alert("Sorry, the 'data-type' attribute has not been defined for this button");
+              return 0;           
+            }    
+  
+            console.log(e.target.dataId, e.target.dataset.type, e.target.dataset.type2);
+            
+            switch (true) {
+                case /add/.test(type):
+                  console.log("ADD BUTTON clicked");
+                  // Throw the Add Event.
+                  // Then Bring up the Add Form if defined.
+                  me.dispatchEvent(new CustomEvent('sdl-srch-grid-add', {
+                    bubbles: true,
+                    composed: true,
+                    detail: {
+                      target: e.target
+                    }
+                  }));  
+                  break;
+              case /edit/.test(type):
+                  var uniqueId = id
+                  if (typeof uniqueId == 'undefined') {
+                    alert("Error, the 'data-id' attribute has not been defined for this button");
+                    return 0;
+                  }
+                  console.log("EDIT BUTTON clicked  --> ID=",uniqueId); 
+                  var recObj = grid.items.find(o => o._id === uniqueId);
+                  // Find the record in the Data Array and return it in the event.
+                  // If Edit Slot is filled in Bring up the form with data loaded.
+                  me.dispatchEvent(new CustomEvent('sdl-srch-grid-edit', {
+                    bubbles: true,
+                    composed: true,
+                    detail: {
+                      target: e.target,
+                      formData: recObj
+                    }
+                  })); 
+                  break;
+              case /delete/.test(type):
+                  var uniqueId = id
+                  if (typeof uniqueId == 'undefined') {
+                    alert("Error, the 'data-id' attribute has not been defined for this button");
+                    return 0;
+                  }
+                  console.log("DELETE BUTTON clicked --> ID=", uniqueId); 
+                  var recObj = grid.items.find(o => o._id === uniqueId);
+                  // Send url with DELETE of this item.
+                  me.dispatchEvent(new CustomEvent('sdl-srch-grid-delete', {
+                    bubbles: true,
+                    composed: true,
+                    detail: {
+                      target: e.target,
+                      formData: recObj
+                    }
+                  }));       
+                  break;
+              case /custom/.test(type):
+                  var uniqueId = id;
+                  if (typeof uniqueId == 'undefined') {
+                    alert("Error, the 'data-id' attribute has not been defined for this button");
+                    return 0;
+                  }
+                  console.log("CUSTOM BUTTON clicked --> ID=", uniqueId); 
+                  console.log("Button 'id' does not follow 'add-', 'edit-', 'delete-' convention");
+                  var recObj = grid.items.find(o => o._id === uniqueId);
+                  // Send url with DELETE of this item.
+                  me.dispatchEvent(new CustomEvent('sdl-srch-grid-custom', {
+                    bubbles: true,
+                    composed: true,
+                    detail: {
+                      target: e.target,
+                      formData: recObj
+                    }
+                  }));       
+                  break;
+              default:
+                alert("Error, Invalid 'data-type' attribute for this button.   Valid 'data-type' attributes will contain one of the following strings:  'add', 'edit', 'delete', 'custom'");
+              return 0
+            }
+          } 
+        });
+  
+  
+        me.addEventListener("changed", function(e) {
+  
+          grid.expandAll = me.expandAll;
+          grid.url = me.url;
+          grid.formData = e.detail.formData;
+  
+          // If they have 'hasChildren' field in their data we assume it is a tree
+          //  We provide the treeDataProvider for trees.
+          if (typeof e.detail.payload[0].hasChildren != 'undefined') {
+            grid.allData = e.detail.payload;
+            grid.dataProvider = this._treeDataProvider;
+          } else {
+            grid.items = e.detail.payload;
+          }
+        });
+      }
     });
   }
 

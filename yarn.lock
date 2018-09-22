@@ -146,11 +146,11 @@
     "@polymer/iron-meta" "^3.0.0-pre.26"
     "@polymer/polymer" "^3.0.0"
 
-"@polymer/lit-element@0.6.0-dev.6", "@polymer/lit-element@^0.6.0-dev.6":
-  version "0.6.0-dev.6"
-  resolved "https://registry.yarnpkg.com/@polymer/lit-element/-/lit-element-0.6.0-dev.6.tgz#d60d01061300c8059d9dde3a9c14e03777b6a35d"
+"@polymer/lit-element@0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@polymer/lit-element/-/lit-element-0.6.1.tgz#56772f8fb0c6d3d73a20a6d17f3bc82ec648664b"
   dependencies:
-    lit-html "^0.11.0"
+    lit-html "^0.11.4"
 
 "@polymer/marked-element@^3.0.0-pre.25":
   version "3.0.1"
@@ -192,13 +192,13 @@
     "@polymer/polymer" "^3.0.0"
     prismjs "^1.11.0"
 
-"@sdl-web/sdl-srch-bar@1.0.21":
-  version "1.0.21"
-  resolved "https://registry.yarnpkg.com/@sdl-web/sdl-srch-bar/-/sdl-srch-bar-1.0.21.tgz#7947ef688554205fdb50d443d680ac3f5891a180"
+"@sdl-web/sdl-srch-bar@1.0.22":
+  version "1.0.22"
+  resolved "https://registry.yarnpkg.com/@sdl-web/sdl-srch-bar/-/sdl-srch-bar-1.0.22.tgz#6dd87d36175a398b2989d7a8ce91b5266d8b207e"
   dependencies:
     "@polymer/iron-ajax" "^3.0.0-pre.21"
     "@polymer/iron-form" "^3.0.0-pre.21"
-    "@polymer/lit-element" "^0.6.0-dev.6"
+    "@polymer/lit-element" "0.6.1"
     "@polymer/polymer" "^3.0.0-pre.13"
     jquery "^3.3.1"
 
@@ -361,9 +361,9 @@ jquery@^3.3.1:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
-lit-html@0.11.1, lit-html@^0.11.0, lit-html@^0.11.4:
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-0.11.1.tgz#ad3dcfea1dbaf65fadf335fa1e2bd9ac19255394"
+lit-html@^0.11.4:
+  version "0.11.4"
+  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-0.11.4.tgz#fa397d2b2f2d0523ebc136e5a1699aa4e9346152"
 
 marked@~0.3.9:
   version "0.3.19"

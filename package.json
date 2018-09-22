@@ -1,6 +1,6 @@
 {
   "name": "@sdl-web/sdl-srch-grid",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "Advanced Search Grid",
   "main": "index.js",
   "repository": "git+https://github.com/generic-web-components/sdl-srch-grid.git",
@@ -8,8 +8,8 @@
   "license": "MIT",
   "dependencies": {
     "@polymer/iron-pages": "^3.0.0-pre.21",
-    "@polymer/lit-element": "^0.6.0-dev.6",
-    "@sdl-web/sdl-srch-bar": "1.0.21",
+    "@polymer/lit-element": "0.6.1",
+    "@sdl-web/sdl-srch-bar": "1.0.22",
     "@vaadin/vaadin-button": "^2.1.0",
     "@vaadin/vaadin-grid": "^5.1.0-beta2",
     "@vaadin/vaadin-icons": "^4.2.0",
@@ -17,8 +17,7 @@
   },
   "resolutions": {
     "@polymer/iron-icon": "3.0.0-pre.25",
-    "@polymer/lit-element": "0.6.0-dev.6",
-    "lit-html": "0.11.1",
+    "@polymer/lit-element": "0.6.1",
     "@vaadin/vaadin-element-mixin": "2.1.2",
     "@vaadin/vaadin-development-mode-detector": "2.0.0",
     "@vaadin/vaadin-usage-statistics": "2.0.1",
