@@ -18,9 +18,9 @@ class SdlSrchGrid extends LitElement {
     super();
     var me = this;
 
-    if (typeof me.autoLoad == 'undefined') { me.autoLoad = "false"; }
-    if (typeof me.onChangeOnly == 'undefined') { me.onChangeOnly = "false"; }
-    if (typeof me.expandAll == 'undefined') { me.expandAll = "false"; }
+    if (typeof me.autoload == 'undefined') { me.autoload = "false"; }
+    if (typeof me.onchangeonly == 'undefined') { me.onchangeonly = "false"; }
+    if (typeof me.expandall == 'undefined') { me.expandall = "false"; }
 
     me._polyfill_Closest();
 
@@ -169,7 +169,7 @@ class SdlSrchGrid extends LitElement {
   
         me.addEventListener("changed", function(e) {
   
-          grid.expandAll = me.expandAll;
+          grid.expandall = me.expandall;
           grid.url = me.url;
           grid.formData = e.detail.formData;
   
@@ -200,7 +200,7 @@ class SdlSrchGrid extends LitElement {
         // So, Get only the records that match the parentItem.
         if (grid.allData[i].parentItem == params.parentItem._id) {
           grid.filteredData.push(grid.allData[i]); 
-          if (typeof grid.expandAll != 'undefined' && grid.expandAll.match(/^t/i)) {
+          if (typeof grid.expandall != 'undefined' && grid.expandall.match(/^t/i)) {
             grid.expandedItems.push(grid.allData[i]);
           }
         }
@@ -210,7 +210,7 @@ class SdlSrchGrid extends LitElement {
         if (typeof grid.allData[i].parentItem == 'undefined' || grid.allData[i].parentItem == '' 
               || grid.allData[i].parentItem == null || grid.allData[i].parentItem == 'null' ) {
           grid.filteredData.push(grid.allData[i]); 
-          if (typeof grid.expandAll != 'undefined' && grid.expandAll.match(/^t/i)) {
+          if (typeof grid.expandall != 'undefined' && grid.expandall.match(/^t/i)) {
             grid.expandedItems.push(grid.allData[i]);
           }
         }
@@ -313,16 +313,16 @@ _polyfill_Closest() {
       url: {
         type: String
       }, 
-      ajaxObjName: {
+      ajaxobjname: {
         type: String
       },
-      expandAll: {
+      expandall: {
         type: String
       },
-      autoLoad: {
+      autoload: {
         type: String
       },
-      onChangeOnly: {
+      onchangeonly: {
         type: String
       }
     }
@@ -331,8 +331,8 @@ _polyfill_Closest() {
   render() {
     var me = this;
 
-    if (typeof me.ajaxObjName === 'undefined') {
-      me.ajaxObjName = "";
+    if (typeof me.ajaxobjname === 'undefined') {
+      me.ajaxobjname = "";
     }
 
     return html`
@@ -341,7 +341,7 @@ _polyfill_Closest() {
           display: block;
         }
       </style>
-          <sdl-srch-bar id="srch-bar" ajaxUrl=${me.url} autoLoad="${me.autoLoad}" onChangeOnly=${me.onChangeOnly} ajaxObjName=${me.ajaxObjName}>
+          <sdl-srch-bar id="srch-bar" .ajaxurl=${me.url} .autoload="${me.autoload}" .onchangeonly=${me.onchangeonly} .ajaxobjname=${me.ajaxobjname}>
             <slot name="search-slot"></slot>
           </sdl-srch-bar>
       
