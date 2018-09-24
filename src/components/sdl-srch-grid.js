@@ -21,6 +21,7 @@ class SdlSrchGrid extends LitElement {
     if (typeof me.autoload == 'undefined') { me.autoload = "false"; }
     if (typeof me.onchangeonly == 'undefined') { me.onchangeonly = "false"; }
     if (typeof me.expandall == 'undefined') { me.expandall = "false"; }
+    if (typeof me.initform == 'undefined') { me.initform = "{}"; }
 
     me._polyfill_Closest();
 
@@ -324,6 +325,9 @@ _polyfill_Closest() {
       },
       onchangeonly: {
         type: String
+      },
+      initform: {
+        type: String
       }
     }
   }
@@ -341,7 +345,7 @@ _polyfill_Closest() {
           display: block;
         }
       </style>
-          <sdl-srch-bar id="srch-bar" .ajaxurl=${me.url} .autoload="${me.autoload}" .onchangeonly=${me.onchangeonly} .ajaxobjname=${me.ajaxobjname}>
+          <sdl-srch-bar id="srch-bar" .ajaxurl=${me.url} .autoload="${me.autoload}" .onchangeonly=${me.onchangeonly} .ajaxobjname=${me.ajaxobjname} .initform=${me.initform}>
             <slot name="search-slot"></slot>
           </sdl-srch-bar>
       

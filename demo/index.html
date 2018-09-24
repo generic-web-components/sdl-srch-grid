@@ -230,7 +230,9 @@
     <div class="vertical-section-container centered">
       <h1>Editable grid Example</h1>
       <u>Note: Button clicks are intercepted in the 'grid-slot' and new events thrown to allow implementation of CRUD operations</u>  
-        <b>Events thrown:</b>   
+      <br><u>Note:</u> We are also using autoload="true" w/ initform='{"input99": "Hello World"}' to prefill the form and send the initial search.
+      <br><br>
+      <b>Events thrown:</b>   
           <ul>
             <li>sdl-srch-grid-add</li>
             <li>sdl-srch-grid-edit</li>
@@ -243,11 +245,11 @@
       <template>         
 
 <!-- Now add sdl-srch-grid to html section -->
-<sdl-srch-grid id='srch-grid99' url='./data/srch-data-8000.txt' autoload="true"  onchangeonly="true">  
+<sdl-srch-grid id='srch-grid99'  autoload="true" initform='{"input99": "Hello World"}' onchangeonly="true" url='./data/srch-data-8000.txt'>  
 
 <!-- Put whatever input fields (and styling) you want into 'search-slot' -->
 <form slot="search-slot">
-  <paper-input name="input1" label="Filter Search">
+  <paper-input name="input99" label="Filter Search">
     <iron-icon icon="search" id="srch-icon" slot="prefix"></iron-icon>
   </paper-input>
 </form>
