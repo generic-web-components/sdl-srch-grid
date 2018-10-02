@@ -176,7 +176,7 @@ class SdlSrchGrid extends LitElement {
   
           // If they have 'hasChildren' field in their data we assume it is a tree
           //  We provide the treeDataProvider for trees.
-          if (typeof e.detail.payload[0].hasChildren != 'undefined') {
+          if (e.detail.payload.length > 0 && typeof e.detail.payload[0].hasChildren != 'undefined') {
             grid.allData = e.detail.payload;
             grid.dataProvider = this._treeDataProvider;
           } else {
