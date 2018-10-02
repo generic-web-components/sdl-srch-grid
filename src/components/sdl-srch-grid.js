@@ -287,6 +287,10 @@ _polyfill_Closest() {
   }
 }
 
+  refreshGrid() {
+    var srchBar = this.shadowRoot.querySelector('#sdl-srch-bar');
+    srchBar.sendEventOrAjax();
+  }
 
   updateRecord(record) {
     var foundIndex = this.grid.items.findIndex(x => x._id == record._id);
@@ -345,7 +349,7 @@ _polyfill_Closest() {
           display: block;
         }
       </style>
-          <sdl-srch-bar id="srch-bar" .ajaxurl=${me.url} .autoload="${me.autoload}" .onchangeonly=${me.onchangeonly} .ajaxobjname=${me.ajaxobjname} .initform=${me.initform}>
+          <sdl-srch-bar id="sdl-srch-bar" .ajaxurl=${me.url} .autoload="${me.autoload}" .onchangeonly=${me.onchangeonly} .ajaxobjname=${me.ajaxobjname} .initform=${me.initform}>
             <slot name="search-slot"></slot>
           </sdl-srch-bar>
       

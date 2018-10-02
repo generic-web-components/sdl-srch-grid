@@ -1,17 +1,19 @@
 # \<sdl-srch-grid\>
 
-High End Generic Search Grid custom element.  
+Generic Search Grid Element.  
 
-Based on the high end vaadin grid component and sdl-srch-bar component.  You can specify the "url" to handle loading & filtering the grid data.    
+If you specify "ajaxUrl" it will handle the ajax for you and only throw it's change event when the ajax has returned - the payload is found in e.detail.payload.  
 
-##  after downloading with npm -- Run the es6 version of the Demo (Assuming you installed at SERVER_ROOT using npm)
+If you do NOT specify "ajaxUrl" then it will throw the "change" event after each key stroke and return to you the form data in e.detail.formData.   
+
+##  Run the es6 version of the Demo (Assuming you installed at SERVER_ROOT using npm)
 ```
-{SERVER_ROOT}/node_modules/@sdl-web/sdl-srch-grid/build-demo/es6-bundled/demo/index.html
+{SERVER_ROOT}/node_modules/@sdl-web/sdl-srch-bar/build-demo/es6-bundled/demo/index.html
 ```
 
-##  Include sdl-srch-grid-loader.js to use as stand-alone bundled component 
+##  Include sdl-srch-bar-loader.js to use as stand-alone bundled component 
 or 
-##  Include sdl-srch-grid.js directly if including in a polymer project. 
+##  Include sdl-srch-bar.js directly if including in a polymer project. 
 ```
 <!doctype html>
 <html lang="en">
@@ -19,41 +21,41 @@ or
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>sdl-srch-grid demo</title>
+    <title>sdl-srch-bar demo</title>
+     <!-- If using as a stand-alone-component:  use sdl-srch-bar-loader.js
+    <script src="./node_modules/@sdl-web/sdl-srch-bar/build-component/sdl-srch-bar-loader.js"></script> -->
+
+    <!-- If using in an existing polymer project:  use sdl-srch-bar.js directly-->
+    <script type="import" src="@sdl-web/sdl-srch-bar/src/components/sdl-srch-bar.js"></script> 
+
+    <!-- Now add sdl-srch-bar to html section -->
+    <sdl-srch-bar id='srch-bar1' ajaxUrl='./data/srch-data.txt'>  
+
+        <!-- Put whatever input fields (and styling) you want into this slot -->
+      <form>
+        <paper-input name="input1" label="Filter Search">
+          <iron-icon icon="search" id="srch-icon" slot="prefix"></iron-icon>
+        </paper-input>
+      </form>
+      
+    </sdl-srch-bar>
 
 
-<!-- If using as a stand-alone-component:  use sdl-srch-grid-loader.js
-<script src="./node_modules/@sdl-web/sdl-srch-grid/build-component/sdl-srch-grid-loader.js"></script> -->
+    <!-- Finally, listen for change event -->
+    <!-- <script>
+        $('document').ready(function(){
 
-<!-- If using in an existing polymer project:  use sdl-srch-grid.js directly-->
-<!-- <script type="import" src="@sdl-web/sdl-srch-grid/src/components/sdl-srch-grid.js"></script>  -->
+          var srch1 = document.querySelector('#srch-bar1');
+          srch1.addEventListener("changed", function(e) {
+            // Do something with the e.detail.payload here if you specified ajaxUrl...
+            // or 
+            // Do something with the e.detail.formData here if you did not specify ajaxUrl...
+          }, false);
 
-<!-- Now add sdl-srch-grid to html section -->
-<sdl-srch-grid id='srch-grid' url='./data/srch-data-8000.txt'>  
+        });
+    </script> -->
 
-  <!-- Put whatever input fields (and styling) you want into 'search-slot' -->
-  <form slot="search-slot">
-    <paper-input name="input1" label="Filter Search">
-      <iron-icon icon="search" id="srch-icon" slot="prefix"></iron-icon>
-    </paper-input>
-  </form>
-
-  <!-- Add your columns using vaadin-grid-column into the 'column-slot' -->
-  <vaadin-grid-column slot="column-slot">
-    <template class="header">Name</template>
-    <template>[[item.name]]</template>
-  </vaadin-grid-column>
-  <vaadin-grid-column slot="column-slot">
-    <template class="header"><vaadin-grid-sorter path="gender">Gender</vaadin-grid-sorter></template>
-    <template>[[item.gender]]</template>
-  </vaadin-grid-column>
-  <vaadin-grid-column slot="column-slot">
-    <template class="header">Eye Color</template>
-    <template>[[item.eyeColor]]</template>
-  </vaadin-grid-column>     
-
-</sdl-srch-grid>
-
+    </script>
   </body>
 </html>
 

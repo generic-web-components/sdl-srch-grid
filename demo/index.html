@@ -267,11 +267,7 @@
   <vaadin-grid-column  >
     <template class="header"><vaadin-grid-sorter path="gender">Gender</vaadin-grid-sorter></template>
     <template>[[item.gender]]</template>
-  </vaadin-grid-column>
-  <vaadin-grid-column  >
-    <template class="header">Eye Color</template>
-    <template>[[item.eyeColor]]</template>
-  </vaadin-grid-column>    
+  </vaadin-grid-column>   
   <vaadin-grid-column>
     <template class="header">
             <!-- Note:  you must define a 'data-type' attribute which contains the word 'add' in it to trigger the sdl-srch-grid-add event.  -->
@@ -290,6 +286,7 @@
         <vaadin-button class="row-action" data-type="delete" data-id=[[item._id]] theme="icon"><iron-icon icon="icons:clear" slot="prefix"></iron-icon></vaadin-button>
 
         <!-- Also Note:  you can define a 'data-type' attribute which contains the word 'custom' if you want to trigger sdl-srch-grid-custom event -- to do some custom action -->
+        <vaadin-button class="row-action" data-type="custom-refresh" data-id=[[item._id]] theme="icon"><iron-icon icon="icons:refresh" slot="prefix"></iron-icon></vaadin-button>
       </div>
     </template>
   </vaadin-grid-column>  
@@ -330,12 +327,13 @@ addEventListener('sdl-srch-grid-delete', function(e) {
 });
 
 addEventListener('sdl-srch-grid-custom', function(e) {
-
+  var grid = document.getElementById('srch-grid99');
   // If you add a button that does not follow the button id naming convention of "add-", "edit-" or "delete-"
   // Then the 'sdl-srch-grid-custom event will be thrown.  
   // You will be able to deal with your custom button here.
   // Note:  e.detail.formData will be filled in if you put the record _id at the end of your id name.
   console.log("CUSTOM=",e);
+  grid.refreshGrid();
 });
 
 addEventListener('sdl-srch-grid-mouseover', function(e) {
