@@ -142,7 +142,7 @@ class SdlSrchGrid extends LitElement {
                   }));       
                   break;
               case /custom/.test(type):
-                  var uniqueId = me._extractId(id);
+                  var uniqueId = parseInt(me._extractId(id));
                   if (typeof uniqueId == 'undefined') {
                     alert("Error, the 'data-id' attribute has not been defined for this button");
                     return 0;
